@@ -1,0 +1,73 @@
+\documentclass[12pt]{article}
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{ifpdf}
+\usepackage{listings}
+\usepackage[small,bf]{caption}
+\usepackage[titletoc]{appendix}
+\usepackage{endnotes}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+%\usepackage{marginnote} %ääremärkuste tegemiseks
+
+\usepackage[margin=3cm]{geometry}
+
+
+\usepackage{subfig}
+\usepackage[final]{graphicx}
+\usepackage{lineno}
+
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage[acronym]{glossaries} %abbreviations
+\usepackage{subfloat}
+
+\usepackage{amssymb}
+\usepackage{cancel}
+
+\usepackage{hyperref} %klikitavad lingid
+\usepackage{cleveref}
+
+\usepackage[
+    hyperref=true,
+    url=false,
+    isbn=false,
+    backref=true,
+    style=numeric-comp,
+    block=none
+]{biblatex}
+\bibliography{bibliography}
+
+\hypersetup{colorlinks=true, linktoc=page}
+
+%\topmargin -1.5cm
+% \oddsidemargin -0.1cm
+% \evensidemargin -0.1cm
+% \textwidth 16.59cm
+% \textheight 21.94cm
+%\pagestyle{fancyplain}
+\linespread{1.5}
+\parindent 0.5cm
+
+
+\usepackage{multirow,bigdelim} %tabelisse veergude-ridade ühendamine
+
+%iga uus sektsioon algab uuelt lehelt
+\let\stdsection\section
+
+%\usepackage[toc,nonumberlist,acronym]{glossaries}
+
+\input{macros.tex}
+
+\begin{document}
+%\selectlanguage{english}
+\linenumbers
+
+\input{intro.tex}
+\input{mem.tex}
+\input{tth.tex}
+
+\newpage
+\printbibliography
+
+\end{document}
