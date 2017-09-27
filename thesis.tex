@@ -47,7 +47,7 @@
 % \textheight 21.94cm
 %\pagestyle{fancyplain}
 \linespread{1.5}
-\parindent 0.5cm
+%\parindent 0.5cm
 
 
 \usepackage{multirow,bigdelim} %tabelisse veergude-ridade ühendamine
@@ -60,12 +60,18 @@
 \input{macros.tex}
 
 \begin{document}
-%\selectlanguage{english}
+\setpagewiselinenumbers
 \linenumbers
+%\selectlanguage{english}
 
-\input{intro.tex}
-\input{mem.tex}
-\input{tth.tex}
+\tableofcontents
+\newpage
+
+%\input{intro.tex}
+\input{btag.tex}
+%\input{mem.tex}
+%\input{tth.tex}
+%\input{lingvist.tex}
 
 \newpage
 \printbibliography

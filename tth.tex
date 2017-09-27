@@ -55,7 +55,7 @@ SingleMuon & Run B & $12.9~\ifb$ \\
 In order to compare simulation to data, the simulated events are weighted according to the integrated luminosity and the predicted cross sections, which are taken from inclusive calculations. In particular, the \ttH cross section is known at NLO accuracy\cite{Dittmaier:1318996,Beenakker:2001rj,Beenakker:2002nc,Dawson:2002tg,Dawson:2003zu}. The Higgs boson branching fraction for \Hbb is affected by radiative corrections that are known up to N4LO (QCD) and NLO (EWK), resulting in an uncertainty of about 1-2\% \cite{Djouadi:1997yw,Butterworth:2010ym,deFlorian:2016spz}.
 The cross section for \ttbar is know at NNLO accuracy and includes soft gluon resummation to NNLL\cite{Czakon:2011xx}. The cross-sections of the minor backgrounds are known to at least NLO, as summarized in \cref{tab:mc_samples}.
 
-In addition to the hard interaction and the consequent showering and hadronization, events from additional pp interactions within the same bunch crossing are superimposed on the simulated event for all processes. The multiplicity distribution of these additional pileup events is reweighted to match the observed number of interactions in data. Furthermore, we correct the MC simulation with additional data-driven correction factors, described in \cref{sec:systematic_unc}.
+In addition to the hard interaction and the consequent showering and hadronization, events from additional pp interactions within the same bunch crossing are superimposed on the simulated event for all processes. The multiplicity distribution of these additional pileup events is reweighted to match the observed number of interactions in data. Furthermore, we correct the MC simulation with additional data-driven correction factors for b tagging, lepton efficiencies, described in \cref{sec:systematic_unc}.
 
 \subsubsection{Modelling of \ttbar}
 \label{sec:ttbar_subprocesses}
@@ -124,18 +124,24 @@ $\mathrm{\mu}^\pm\mathrm{\mu}^\mp$ & $p_T > 17 (8)\GeV$ & $p_T > 25 (15)\GeV$ & 
 
 \subsubsection{Jets}
 \label{sec:object_id_jets}
-As the signal process is expected to produce between 4 to 6 jets at the leading order, the accurate reconstruction of jets is critical for this analysis. We use the anti-$k_T$ clustering algorithm\cite{Cacciari:2008gp} in the \texttt{FASTJET} implementation\cite{Cacciari:2011ma} with a distance parameter 0.4 to reconstruct jets from particle flow candidates \cite{CMS:2010xta,CMS:2009nxa,CMS:2010byl} and use the CMS PF jet ID algorithm to reject reconstruction failures and noise. The noise rejection works on the basis of cuts on jet energy fractions from various types of PF candidates, namely muons, electrons, photons, charged hadron and neutral hadron candidates and has a noise rejection of around 99\% \cite{CMS:2017wyc}.
+As the signal process is expected to produce between 4 to 6 jets at the leading order, an accurate reconstruction of jets is critical for this analysis. We use the anti-$k_T$ clustering algorithm\cite{Cacciari:2008gp} in the \texttt{FASTJET} implementation\cite{Cacciari:2011ma} with a distance parameter 0.4 to reconstruct jets from particle flow candidates \cite{CMS:2010xta,CMS:2009nxa,CMS:2010byl} and use the CMS PF jet ID algorithm to reject reconstruction failures and noise. The noise rejection works on the basis of cuts on jet energy fractions from various types of PF candidates, namely muons, electrons, photons, charged hadron and neutral hadron candidates and has a noise rejection of around 99\% \cite{CMS:2017wyc}.
 
 Charged particles from pileup interactions are removed from clustering via the process of charged hadron subtraction. As the CHS relies on the reconstruction of tracks and the association of charged hadrons to tracks, the procedure is applied within the tracker volume ($|\eta| < 2.5$). We choose the leading PV as the one that has the highest magnitude of total track transverse momentum squared ($\sum |p_T^{\mathrm{track}}|^2$), with the rest of the PVs passing certain quality criteria as subleading PVs. Charged hadrons that are associated to tracks that are compatible with subleading PVs are removed. The subtraction procedure reduces the amount of jets arising from pileup from about 20\% to 5\% in the tracker region and also improves the momentum resolution and angular resolution ($\Delta R \simeq 0.01$) of jets\cite{CMS:2014ata}.
 
-The experimentally measured energy of the jets have to be calibrated in terms of jet energy scale and resolution for both data and simulation.
+The experimentally measured energies of the jets have to be calibrated in terms of jet energy scale and resolution in both data and simulation. This is done using jet energy corrections, which correct for offset energy from multiple interactions in the same bunch crossing (pileup), the detector response based on simulation, the residual differences between data and simulation based on well-understood channels such as dijet production, and the detector response to jet flavor. 
 
-\fix more description of JEC
+The presence of pileup interactions generates a diffuse energy component that results in an energy offset in the jets. This offset correction is estimated using simulation by comparing jets in a MC sample without pileup events to the same simulation overlayed with pileup, geometrically matching them to the same underlying jet on the generator level \cite{cms_jec_2017}. An additional scale factor between data and simulation is extracted from zero-bias data using the random cone method \cite{Chatrchyan:2011ds}.  
+
+The detector response is defined as the ratio between the reconstructed jet and a geometrically matched particle-level jet: $R = \langle p_T \rangle / \langle p_{T,\mathrm{particle}} \rangle$. It is estimated using a detailed model of the detector geometry, alignment, calibration and electrongs, implemented in \texttt{GEANT4} in bins of particle-level jet momentum and reconstructed jet $\eta$. The corrections are able to bring the response to a deviation of approximately 1\% from unity based on simulations. A residual data to simulation correction scale factor is applied on data based on transverse momentum balance from dijet, $\mathrm{Z}/\gamma$+jets and multijet events. These relative corrections rely on comparing the jet under calibration (probe) to a reference object (tag) and are of the order of a few percent in the central region considered in this analysis \cite{Chatrchyan:2011ds,cms_jec_2017}.
+
+The jet response to different flavors is estimated using simulation, comparing the response of jets associated with partons according to a geometric matching between \pythia and \herwig. The flavor response is generally within a few percent, with differences between the flavors arising from fragmentation, where gluons fragment the most into soft particles that may remain unreconstructed and thus have the lowest response, and particle composition, with the neutral hadronic component having the largest effect. The flavor corrections are validated in Z+b-jet data and the residual correction between data and simulation is found to be consistent with unity \cite{Chatrchyan:2011ds}.
+
+In contrast to jet energy scale, which is known with a total uncertainty better than $3\%$ over the relevant phase space, the jet $p_T$ resolution is known to around $10-20\%$. The resolution can be determined using $p_T$ balance as for JEC, but measuring the width instead of the mean of the response distribution. Both $\mathrm{Z}/\gamma$+jet and dijet events are used to determine the JER response \cite{Chatrchyan:2011ds}. In the MEM, we also use the approximate jet resolution functions derived from simulation in order to account for detector effects in the phase space integral as explained in \cref{sec:mem_transfer}.
 
 \subsubsection{B-tagging}
 \label{sec:object_id_btag}
 
-Since the \ttHbb signal is characterized by the presence of 4 bottom quarks, we rely on the combined secondary vertex algorithm (CSVv2) \cite{Chatrchyan:2012jua} to identify jets as arising from bottom quarks via b tagging. The CSVv2 algorithm uses secondary vertex properties such as the impact parameter along with track-based lifetime information to create a robust combined discriminator $\xi$ optimized to distinguish between jets arising from bottom quarks and light quarks using supervised learning. In Run 2 of the LHC, the CSVv2 algorithm has been improved with a new vertex reconstruction algorithm, as well as using artificial neural networks instead of a likelihood method to combine the input variables, such that correlations are properly taken into account\cite{CMS:2016kkf}.
+Since the \ttHbb~signal is characterized by the presence of 4 bottom quarks, the accurate identification of jets arising from the hadronization of bottom quarks is important in this analysis. We rely on the combined secondary vertex algorithm (CSVv2) \cite{Chatrchyan:2012jua} to identify b jets. The CSVv2 algorithm uses secondary vertex properties such as the impact parameter along with track-based lifetime information to create a robust combined discriminator $\xi$ optimized to distinguish between jets arising from bottom quarks and light quarks using supervised learning. In Run 2 of the LHC, the CSVv2 algorithm has been improved with a new vertex reconstruction algorithm, as well as using artificial neural networks instead of a likelihood method to combine the input variables, such that correlations are properly taken into account\cite{CMS-PAS-BTV-15-001}.
 
 The threshold value of the discriminant, above which a jet is considered to be b tagged ($\xi > \xi_c$) is chosen such that the efficiency of misidentifying jets arising from light quarks (u,d,s) or gluons as b-jets would be sufficiently low (~$1\%$). This corresponds to the efficiency of $70\%$ of correctly identifying bottom quarks and of mis-identifying charm quarks around $20\%$ and is denoted the CSVv2 medium working point.
 
@@ -178,7 +184,7 @@ The likelihood ratio as defined here ignores the differences in $f(\xi_k | \math
 
 We use this likelihood discriminant to define heavy-flavour enhanced regions, as well as to select the bottom quark candidates in the application of the MEM, as described in \cref{sec:mem_application}. 
 
-As we have used the detailed b tagging discriminator shape information in constructing the $\mathcal{BLR}$, we must experimentally calibrate the full range of this observable using data. This is done by deriving a scale factor between data and simulation that depends on the discriminator value, jet kinematics and flavour using a tag-and-probe method. The tag jet is required to pass the medium operating point that has been described earlier and iteratively correcting the discriminator distribution of the probe jet. In order to extract the weight for the b jets, the procedure relies on dilepton \ttbar events with the contribution from light jets and backgrounds subtracted using simulation, whereas for the scale factor for light jets, Z+jets events are used. The procedure is iterative, as the scale factor for light jets is required for the extraction of the b jet scale factor and vice versa \cite{CMS:2013sea,CMS:2016kkf}. The systematic uncertainties from this reweighting are described in \cref{sec:systematic_unc}.
+As we have used the detailed b tagging discriminator shape information in constructing the $\mathcal{BLR}$, we must experimentally calibrate the full range of this observable using data. This is done by deriving a scale factor between data and simulation that depends on the discriminator value, jet kinematics and flavour using a tag-and-probe method. The tag jet is required to pass the medium operating point that has been described earlier and iteratively correcting the discriminator distribution of the probe jet. In order to extract the weight for the b jets, the procedure relies on dilepton \ttbar events with the contribution from light jets and backgrounds subtracted using simulation, whereas for the scale factor for light jets, Z+jets events are used. The procedure is iterative, as the scale factor for light jets is required for the extraction of the b jet scale factor and vice versa \cite{CMS:2013sea,CMS-PAS-BTV-15-001}. The systematic uncertainties from this reweighting are described in \cref{sec:systematic_unc}.
 
 The leptonic decays of the W boson produce neutrinos, which are only partially reconstructed by the detector as \MET, defined as the negative sum of all the momenta of the reconstructed particles in the transverse plane. In the SL channel, we can directly associate the \MET with the transverse momenta of the neutrinos, through the modelling of the recoil as described in \cref{sec:transfer_functions} whereas in the DL channel, only the total momentum of both neutrinosis  constrained by the \MET.
 
@@ -210,6 +216,7 @@ The likelihood discriminant based on b tagging enhances the \ttbar + heavy flavo
 An experimental mass estimator built from randomly selected jet pairs results in a much broader distribution compared to experimental resolution, whereas choosing the pair of jets that would give a mass closest to $m_H$ would cause also the background to exhibit a signal-like peak.
 
 Therefore, we use the MEM discriminant, introduced in \cref{sec:mem}, to compute theory-motivated weights $P_{\ttHbb}$ and $P_{\ttbb}$ for each candidate event. We construct a discriminant based on the likelihood ratio of these weights,
+
 \begin{equation}
 \label{eq:mem_ratio}
 P_{\mathrm{s}/\mathrm{b}} = \frac{P_{\ttHbb}}{P_{\ttHbb} + \alpha P_{\ttbb}}
@@ -260,12 +267,34 @@ In the next section, we will discuss the systematic uncertainties that affect th
 \label{sec:systematic_unc}
 We have already mentioned in passing that there are a number of experimental as well as theoretical uncertainties that must be taken into account.
 
-Among the experimental uncertainties, the dominant ones are uncertainties on the jet energy scale corrections and the reweighting of the b tagging discriminant. Both of these can affect the yields of all the processes, since they change the selection efficiency, as well as the shapes of the final discriminants. In case the source of the uncertainty is the same across several categories, the nuisance parameters associated with the uncertainties are treated as fully correlated.
+Among the experimental uncertainties, the dominant ones are uncertainties on the jet energy scale corrections (\cref{sec:jec_unc}) and the reweighting of the b tagging discriminant (\cref{sec:btag_unc}). Both of these can affect the yields of all the processes, since they change the selection efficiency, as well as the shapes of the final discriminants. In case the source of the uncertainty is the same across several categories, the nuisance parameters associated with the uncertainties are treated as fully correlated.
 
 From the theoretical uncertainties, the most important ones arise from the variation of the renormalization and factorization scale of the \ttbar+jets subprocesses and the \ttH signal. Furthermore, since the \ttbar+jets \texttt{POWHEG} model we currently use in the analysis treats the \ttbb process only at leading order accuracy, where the $\mathrm{b}\bar{\mathrm{b}}$ pair is generated from gluon splittings using a parton shower, we have considerable additional theoretical uncertainties on the modelling of \ttbb.
 
+We give a detailed overview of the most important experimental and theoretical uncertainties along with their estimation in the next sections. The full list of systematic uncertainties along with their effect is show in \cref{tab:systematic_uncertainties}.
+
+\begin{table}[h!]
+
+\begin{center}
+\caption{}
+\label{tab:systematic_uncertainties}
+\begin{tabular}{c|cccc}
+\hline
+uncertainty & normalization & shape & process & model \\
+\hline
+JEC (26 sources) & yes & yes & all & gaussian \\
+btag & yes & yes & all & gaussian \\
+\hline
+bla & yes & yes & all & gaussian \\
+\hline
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
 \subsubsection{Jet energy correction uncertainties}
-In Run II, we consider various sources of jet energy correction uncertainties with their corresponding correlations, as opposed to a single bulk JEC uncertainty. This significant advancement has resulted from an improved modelling of the detector performance and better calibration techniques developed with more data. 
+\label{sec:jec_unc}
+In Run II, we consider various sources of jet energy correction uncertainties with their corresponding correlations, as opposed to a single bulk JEC uncertainty as was done for this analysis in Run I. This significant advancement has resulted from an improved modelling of the detector performance and better calibration techniques developed with more data. 
 
 The magnitude and correlation of the uncertainties on jet energy scale and resolution are estimated in a dedicated CMS analysis and are provided as a vector of per-jet corrections with $p_T$ and $\eta$ dependent correlations. The most important groups of correction uncertainties are the following.
 \begin{itemize}
@@ -277,13 +306,15 @@ The magnitude and correlation of the uncertainties on jet energy scale and resol
 \end{itemize}
 These 5 groups factorize into about 26 independent sources with up and down variations.
 
-In order to account for the JEC uncertainties in the analysis, we propagate the uncertainties in jet energy corrections and resolution to the jet momenta and all the event-level observables that derive from them in MC. This is done separately for all the sources so that we can fully account for the correlations between the uncertainties. Thus, we are able to account for both the changes in efficiency and discriminator shape in the final analysis categories.
+In order to account for the JEC scale uncertainties in the analysis, we propagate the uncertainties in jet energy corrections and resolution to the jet momenta and all the event-level observables that derive from them in MC by shifting the jet energy scale by one standard deviation. This is done separately for all the sources so that we can fully account for the correlations between the various sources. Thus, we are able to account for both the changes in efficiency (normalization) and discriminator shape in the final analysis categories.
 In order to propagate the uncertainty to a high-level multivariate observable such as the MEM, we need to recompute it using the variated objects. We use the approximate MEM variation technique of this as described in \cref{sec:mem_uncertainties}.
 
+In addition to uncertainties in the jet energy scale corrections, we also consider uncertainties on the jet energy resolution corrections. 
 \subsubsection{B-tagging systematic uncertainties}
+\label{sec:btag_unc}
 Due to the high number of b tagged jets in the final state, this analysis is sensitive to uncertainties in b tagging. As we have described in \cref{sec:object_id_btag}, we correct for mismodeling in the b tagging discriminator shape using a tag and probe method.
 
-The uncertainties of this correction include the propagation of jet energy scale uncertainty, which affects the determination of the correction through changes in efficiency and the discriminator value. Furthermore, simulation is used to subtract the non-relevant jet flavor components in determining the scale factor for bottom (light) jets. For the scale factor for light jets, the fraction of bottom (charm) jets is variated within 20\% of the MC prediction in the Z+jets simulation used to determine the scale factors. Similarly, for the extraction of the b jet scale factor, the light flavour component in the \ttbar+jets dileptonic sample arises from additional radiation and is estimated to be 20\% \cite{CMS:2016kkf}.
+The uncertainties of this correction include the propagation of jet energy scale uncertainty, which affects the determination of the correction through changes in efficiency and the discriminator value. Furthermore, simulation is used to subtract the non-relevant jet flavor components in determining the scale factor for bottom (light) jets. For the scale factor for light jets, the fraction of bottom (charm) jets is variated within 20\% of the MC prediction in the Z+jets simulation used to determine the scale factors. Similarly, for the extraction of the b jet scale factor, the light flavour component in the \ttbar+jets dileptonic sample arises from additional radiation and is estimated to be 20\% \cite{CMS-PAS-BTV-15-001}.
 
 As the b discriminator scale factor is determined in bins of the discriminator value, statistical fluctuations in bins with a low number of data and simulated events introduce an uncertainty on the final scale factor. This uncertainty is only significant in case the size of the fluctuations varies systematically over the b discriminant range. Since the discriminator has a roughly monotonous increasing (decreasing) shape for b jets (light jets), this condition is fulfilled. The statistical uncertainties are accounted for by a sum of polynomials of first and second order, where the nuisance parameter is the overall scale of the distortion.
 
@@ -293,6 +324,13 @@ We propagate the uncertainties from b tagging in the form of a set of per-event 
 
 \fix plot of b-discriminator before and after re-weighting with shape uncertainties.
 
+\subsubsection{Other systematic uncertainties}
+We also assess the effect of uncertainties in the lepton identification, isolation and trigger selection, which may have different efficiencies in data and simulation and are thus corrected using scale factors. For muons, we assign a $1\%$ normalization uncertainty for the lepton ID, $1\%$ for isolation and $0.5\%$ for the so-called HIP effect, on top of the statistical uncertainties on the muon scale factor\cite{CMS:2017_mu_sf}. For electrons, we use $p_T$ and supercluster $\eta$-dependent scale factor uncertainties derived using a tag-and-probe method, which are generally below $1\%$ \cite{CMS:2017_ele_sf}.
+
+As the pileup profile in simulation is corrected to data using a pileup-dependent scale factor, we estimate the uncertainty in the pileup correction by varying the minimum bias cross section from $\sigma = 69.2$~mb by $4.6\%$, corresponding to the uncertainty in the number of interactions in minimum bias events from luminosity and cross section\cite{CMS:2017_pu_weight_twiki}.
+
+Furthermore, the uncertainty on total integrated luminosity is estimated to be $2.5\%$ using cluster counting in the pixel detector and affects all processes\cite{CMS:2017sdi,CMS:2017_lumi}.
+
 \subsubsection{Theoretical uncertainties}
 The most important theoretical uncertainties arise from the \ttbar+heavy flavour processes, namely \ttbb, \tttwob, \ttb~and \ttcc. Currently, there is no direct way to determine these backgrounds directly from data. Therefore, we assign a conservative 50\% normalization uncertainty on all the \ttbar+heavy flavour processes, uncorrelated across the aforementioned subprocesses.
 
@@ -300,17 +338,18 @@ The cross sections of all involved signal and background processes are known to 
 
 \subsection{Statistical method}
 \label{sec:statistical_method}
-In order to interpret the data, we use the same statistical framework as has been used for other Higgs boson searches in the CMS collaboration. We wish to measure the signal strength modifier $\mu = \sigma_{\ttH}/\sigma_{\ttH,\mathrm{SM}}$ and in the absence of an observed signal, exclude $\mu \ge \mu^{CL}$ at a certain confidence level. The null hypothesis ($H_0$) is therefore the presence signal with a given $\mu$ and background, whereas the alternative hypothesis is no signal ($H_1, \mu = 0 $). Based on the data, we seek to exclude the null hypothesis above a certain $\mu$.
+In order to interpret the data, we use the same statistical framework as has been used for other Higgs boson searches in the CMS collaboration\cite{Chatrchyan:2012xdj,Chatrchyan:2012tx,ATLAS:2011tau}. We wish to measure the signal strength modifier $\mu = \sigma_{\ttH}/\sigma_{\ttH,\mathrm{SM}}$ and in the absence of an observed signal, exclude $\mu \ge \mu^{CL}$ at a certain confidence level. The null hypothesis ($H_0$) is therefore the presence signal with a given $\mu$ and background, whereas the alternative hypothesis is no signal ($H_1, \mu = 0 $). Based on the data, we seek to exclude the null hypothesis above a certain $\mu$.
 
 The predictions for both signal (denoted as $s$) and background (denoted as $b$) yields are subject to uncertainties introduced in \cref{sec:systematic_unc} such that the expectations are functions of the nuisance parameters $\theta$: $s(\theta)$ and $b(\theta)$. The uncertainties are assumed to be either fully correlated or uncorrelated, as is more appropriate and conservative, which allows the likelihood function to be written in a factorized form.
 
-To determine confidence intervals on the Higgs boson production cross section, we use the $CL_s$ method, which defines the likelihood function $\mathcal{L}(\mathrm{data} | \mu, \theta)$ as
+To determine confidence intervals on the Higgs boson production cross section and thus quantify the absence of a signal, we use the $CL_s$ method \cite{Junk:1999kv,Read:2002}, which defines the likelihood function $\mathcal{L}(\mathrm{data} | \mu, \theta)$ as
+
 \begin{align}
 \label{eq:likelihood}
 \mathcal{L}(\mathrm{data} | \mu, \theta) =&  \mathrm{Poisson}(\mathrm{data} | \mu \cdot s(\theta) + b(\theta)) \cdot p(\tilde{\theta} | \theta)\\
 =& \prod_{i\in \mathrm{bins}} \frac{(\mu s_i + b_i)^{n_i}}{n_i!} \exp{[-(\mu s_i + b_i)]} \cdot p(\tilde{\theta} | \theta).
 \end{align}
-We have used Poisson probabilities to observe $n_i$ events in the bin $i$ of a discretized distribution, given an expectation $\mu s_i + b_i$. The distribution $p(\tilde{\theta} | \theta)$ encodes the prior knowledge on the nuisance parameters, which have default values $\tilde{\theta}$. This likelihood function can be computed both with observed data and with "pseudodata", which is constructed from simulation under a specific known hypothesis.
+We have used Poisson probabilities to observe $n_i$ events in the bin $i$ of a discretized distribution, given an expectation $\mu s_i + b_i$. The distribution $p(\tilde{\theta} | \theta)$ encodes the prior knowledge on the nuisance parameters, which have default values $\tilde{\theta}$. This likelihood function can be computed both with observed data and with "pseudodata", which is constructed from simulation under a specific hypothesis.
 
 We use the test statistic $\tilde{q}_\mu$, based on the profile likelihood ratio\cite{Cowan:2010js}, to assess the compatibility of the data with either the \textit{background-only} or \textit{signal+background} hypotheses:
 
@@ -320,29 +359,52 @@ We use the test statistic $\tilde{q}_\mu$, based on the profile likelihood ratio
 This test statistic is constructed such that it considers only models with $\mu \ge 0$, futhermore it is constrained to be one sided by $\hat{\mu} \le \mu$ such that data with $\hat{\mu} > \mu$ are not used as part of the rejection region for the test on the upper limit of $\mu$.
 
 Here $\hat{\mu}_\theta$ is the conditional maximum likelihood estimator of $\theta$ given a fixed value $\mu$, wheras $\hat{\mu}$ and $\hat{\theta}$ refer to the overall maximum likelihood estimators of both quantities. For a given signal strength modifier $\mu$ that we test, we first find the observed value of $\tilde{q}_\mu^{\mathrm{obs}}$ and the nuisance parameters $\hat{\theta}_0$ (background hypothesis) and $\hat{\theta}_\mu$ (signal hypothesis). Then, in order to compute the $CL_s(\mu)$, we compute the p-values of the signal and background hypotheses using
+
 \begin{equation}
 p_{\mu} = \int_{\tilde{q}_{\mu}{\mathrm{obs}}}^\infty f(\tilde{q}_{\mu} | \mu, \hat{\theta}_{\mu})\ \mathrm{d}\tilde{q}_\mu
 \end{equation}
 and
+
 \begin{equation}
 1 - p_b = \int_{\tilde{q}_{\mu}^{\mathrm{obs}}}^\infty f(\tilde{q}_{\mu} | 0, \hat{\theta}_0)\ \mathrm{d}\tilde{q}_{\mu}.
 \end{equation}
 
 The p-values are the probabilities of observing results as extreme or more given the underlying hypothesis and are derived from the probability densities of $\tilde{q}_{\mu}$ under a given hypothesis: $f(\tilde{q}_\mu | \mu, \hat{\theta}_\mu^{\mathrm{obs}})$. We find the 95\% confidence level on the upper limit of $\mu$ by adjusting $\mu$ until
+
 \begin{equation}
-CL_s(\mu) = \frac{p_\mu}{1 - p_b} < 0.05.
+\mathrm{CL}_s(\mu) = \frac{p_\mu}{1 - p_b} < 0.05.
 \end{equation}
+Alternatively, if $\mathrm{CL}_s < \alpha$ at $\mu$, then the Higgs boson is excluded at a production rate of $\mu$ or higher with a confidence level $1 - \alpha$.
 
 In order to compute the upper limit on $\mu$ given the observed data, we need the PDFs $f(\tilde{q}_\mu | \mu, \hat{\theta}_\mu^{\mathrm{obs}})$, which can be derived using a Monte Carlo method by generating pseudo-data assuming the given signal strength $\mu$ and fitting the observed data to evaluate the test statistic. As the MC procedure for generating the PDFs can be very time consuming, we use an approximate asymptotic distribution \cite{Cowan:2010js} for the PDF $\tilde{q}_\mu$, which results from the Wald approximation \cite{wald1943tests}:
+
 \begin{equation}
--2 \ln{\lambda(\mu)} = \frac{(\mu - \hat{\mu})^2}{\sigma^2}+ \mathcal{O}(1/sqrt{N})
+-2 \ln{\lambda(\mu)} = \frac{(\mu - \hat{\mu})^2}{\sigma^2}+ \mathcal{O}(1/\sqrt{N})
 \end{equation}
- where $\sigma$ is the standard deviation of $\hat{\mu}$ derived from the full covariance matrix of the likelihood function.
- 
+where $\sigma$ is the standard deviation of $\hat{\mu}$ derived from the full covariance matrix of the likelihood function.
+
 Using the asymptotic distribution for $f(\tilde{q}_\mu | \mu, \hat{\theta}_\mu^{\mathrm{obs}})$, we find the upper limit for $\mu$ at a confidence level of $1 - \alpha$ to be
+
 \begin{equation}
 \mu = \hat{\mu} + \sigma \Phi^{-1}(1 - \alpha)
 \end{equation}
 where $\Phi^{-1}$ is the inverse of the cumulative distribution of the Gaussian PDF. The standard deviation of $\mu$ can be computed from the likelihood function \cref{eq:likelihood} using the so-called Asimov data set, where the MC prediction is used for $s_i$ and $b_i$.
 
 We will also quote the expected sensitivity of the measurement, which is derived from simulation, assuming $\mu = 1$ and computing the median expected upper limit on $\mu$ using the asymptotic formulae. 
+
+\subsubsection{Uncertainties in the statistical model}
+
+Our prior knowledge of the systematic uncertainties is encoded in $p(\tilde{\theta} | \theta)$, where the nuisance parameters $\theta$ are minimized in the profile likelihood method in a frequentist sense. We use $\tilde{\theta}$ to represent our best estimate of the nuisance parameters, which can be
+\begin{itemize}
+\item gaussian, used for shape variations,
+\item log-normal used for nuisances that do not have physical negative values,
+\item flat, in case we cannot assign a prior uncertainty.
+\end{itemize}
+
+We use the Barlow-Beeston method in the fit to account for limited number of simulation events. In this method, the number of predicted events for a background component in a binned distribution is added as a nuisance parameter in the likelihood and minimized with the initial values arising from the observed Poisson counts using Newton's method \cite{Barlow:1993dm}. 
+
+\subsubsection{Analysis of the model}
+In this section, we will study the expected sensitivity predicted by the statistical model. We will look in detail at the effect of systematic uncertainties in the form of the constraints on the nuisance parameters after having been fit to pseudo-data derived from MC.
+
+\subsection{Results}
+After having validated the statistical model on simulation, we include data in a step-by-step fashion by unblinding the data in the various control regions successively.
