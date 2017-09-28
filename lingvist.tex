@@ -3,7 +3,7 @@
 
 In a computerised learning course, tailoring the course contents to the specific pre-existing knowledge of an individual learner allows the learning material to be covered more efficiently by focussing on subjects that are not yet well understood as opposed to subjects that the learner (user) is likely to know well. Knowledge estimation deals with the question of parametrising and modelling the knowledge about various topics (items) on a per-user basis. 
 
-In this report, we describe a computational method for estimating the overall second-language vocabulary of users, based on answers to a small set of trial words that the users attempt to guess. By implementing a simplified version of Deep Knowledge Tracing \cite{DBLP:journals/corr/PiechSHGSGS15}, we show that by predicting the knowledge of individual items on a per-user basis using a sequence of previous guesses, we can develop an accurate estimation procedure for the overall knowledge of the user.
+In this report, we describe a computational method for estimating the overall second-language vocabulary of users, based on answers to a small set of trial words that the users attempt to guess. By implementing a simplified version of Deep Knowledge Tracing~\cite{DBLP:journals/corr/PiechSHGSGS15}, we show that by predicting the knowledge of individual items on a per-user basis using a sequence of previous guesses, we can develop an accurate estimation procedure for the overall knowledge of the user.
 
 We achieve this by compressing the sparse and variable-length guess sequences into a fixed-size representation using a recurrent neural network (RNN) and furthermore mapping this small fixed-size representation into a vector that can be interpreted as distinct per-item knowledge likelihoods.
 
@@ -12,9 +12,9 @@ This report is organized as follows: in the first section, we review the mathema
 \subsection{Problem statement and data description}
 
 \subsubsection{Knowledge tracing}
-The problem of knowledge estimation can formally be stated in the following way. We have a set of items, indexed by $n = {1, 2, \dots, N}$, for which users, indexed by $m  = {1, 2, \dots, M}$ provide guesses which can be correct or incorrect, denoted by $g_{nm}=\{1, 0\}$. Therefore on a per-user basis, the guess data form a sequence $S_m = [(n_1, g_1), \dots, (n_i, g_i), \dots, (n_T, g_T)]$ where $T$ is the number of guesses a user has made. Knowledge of a specific user can then be succinctly written as $\vec{g} = (g_1, g_2, \dots, g_M)$. We assume that we have no control over the order in which items are presented to the user, in general, the sequence may contain guesses in an arbitrary order, possibly with gaps between the successive indices $m_i$ and $m_{i+1}$. The items themselves may be arbitrary, but in our case, they always represent word pairs, asking the user to guess a word in their target language based on an explanation in their source language. We use the term lexical unit (LU) to denote such word pairs. An example of a LU for the word *conseil - advice* can be seen on \cref{fig:lu_example}.
+The problem of knowledge estimation can formally be stated in the following way. We have a set of items, indexed by $n = {1, 2, \dots, N}$, for which users, indexed by $m  = {1, 2, \dots, M}$ provide guesses which can be correct or incorrect, denoted by $g_{nm}=\{1, 0\}$. Therefore on a per-user basis, the guess data form a sequence $S_m = [(n_1, g_1), \dots, (n_i, g_i), \dots, (n_T, g_T)]$ where $T$ is the number of guesses a user has made. Knowledge of a specific user can then be succinctly written as $\vec{g} = (g_1, g_2, \dots, g_M)$. We assume that we have no control over the order in which items are presented to the user, in general, the sequence may contain guesses in an arbitrary order, possibly with gaps between the successive indices $m_i$ and $m_{i+1}$. The items themselves may be arbitrary, but in our case, they always represent word pairs, asking the user to guess a word in their target language based on an explanation in their source language. We use the term lexical unit (LU) to denote such word pairs. An example of a LU for the word *conseil - advice* can be seen on~\cref{fig:lu_example}.
 
-These data can be represented as a $(N \times M)$ matrix $G = (g_{nm})$, with $N$ being the total number of users and $M$ the total number of items. In general, due to the specifics of the way the questions are posed to the users, this matrix is sparsely filled, as can be seen on \cref{fig:user_data}.
+These data can be represented as a $(N \times M)$ matrix $G = (g_{nm})$, with $N$ being the total number of users and $M$ the total number of items. In general, due to the specifics of the way the questions are posed to the users, this matrix is sparsely filled, as can be seen on~\cref{fig:user_data}.
 
 \begin{figure}[ht]
 \centering
@@ -38,7 +38,7 @@ We stress that the guess probabilities of items may well be related to each othe
 \end{figure} 
 
 \subsubsection{Data}
-We use data from roughly 15000 users from the English to French course at Lingvist, requiring that users have answered at least 100 words. The course consists of roughly 5400 individual LUs. Overall, an average user has answered about 590 LUs and an average LU has about 1600 answers, however, the distributions have significant non-Gaussian tails, as can be seen on \cref{fig:user_lu_distribution}. We have also validated the model on several different language pairs and have seen that the results are broadly replicable.
+We use data from roughly 15000 users from the English to French course at Lingvist, requiring that users have answered at least 100 words. The course consists of roughly 5400 individual LUs. Overall, an average user has answered about 590 LUs and an average LU has about 1600 answers, however, the distributions have significant non-Gaussian tails, as can be seen on~\cref{fig:user_lu_distribution}. We have also validated the model on several different language pairs and have seen that the results are broadly replicable.
 
 The problem as stated here is well known in literature as matrix completion\cite{candes2009exact}, where the task is to discover hidden or latent variables that would allow the unspecified elements of a matrix to be estimated based on assumptions about rows or columns being sampled from a common distribution. Such problems are typically solved with some combination of collaborative filtering and matrix factorization. However, as we may also want to model time-dependent behaviour of the estimated knowledge, we seek a more generic solution to the problem that would make it possible to add arbitrary information about users and guesses and derive the appropriate model without much expert knowledge.
 
@@ -48,7 +48,7 @@ The problem as stated here is well known in literature as matrix completion\cite
 
 Here we describe the baseline models that will be used as reference implementations. The simplest model for predicting the prior knowledge rate of words would simply be to assume that any user is an average user and each word with index $n=1 \dots N$ has a probability $p_n$ of being known by any user, where the probability is simply estimated by computing the ratio of correct to all guesses of this word by all users. Clearly this does not allow the learning experience to be tailored, but it is a reasonable first guess about the user in the absence of other data.
 
-As the user proceeds through the course, their guesses will allow us to update our estimation of their knowledge in a Bayesian framework. In general, Bayesian Knowledge Tracing \cite{corbett1994knowledge} has been shown to perform at least as well as the best machine-learning based models, however, such models require considerable domain knowledge and manual item labelling to be used successfully\cite{khajah2016deep}, thus we investigate supervised neural networks as a possible solution.
+As the user proceeds through the course, their guesses will allow us to update our estimation of their knowledge in a Bayesian framework. In general, Bayesian Knowledge Tracing~\cite{corbett1994knowledge} has been shown to perform at least as well as the best machine-learning based models, however, such models require considerable domain knowledge and manual item labelling to be used successfully\cite{khajah2016deep}, thus we investigate supervised neural networks as a possible solution.
 
 In order to measure how well a model is able to predict the known items, we need to establish a set of metrics. In particular we use the number of correctly predicted items that the user actually knows (true positives) and the number of items incorrectly predicted to be known (false positives). Thus, we effectively treat the problem as binary classification with each guess attempt being an independent trial of equal weight. 
 We use these true and false positive rates to construct the receiver operating characteristic area-under curve (ROC AUC) as an overall average performance indicator. Such a metric considers all trials as equal, meaning it is tuned to measure the performance of the model on the same distribution of words that we use to train it with. An alternative would be to treat each word, regardless of how many guesses have been made for it, as equal. We refer to this later as the LU-weighted case.
@@ -86,7 +86,7 @@ We train the model with minibatches of 100 users for about 20-100 epochs with th
 
 \subsubsection{Optimization studies of the RNN model}
 
-In general, the model performance has only a mild dependence on the choice of hyperparameter values. Nevertheless, we scan the hyperparameters by computing a cross-validated mean AUC at each point in a 5-dimensional space, consisting of the size of the LSTM layer, the size of the intermediate dense layers, the number of intermediate dense layers, the amount of dropout and the learning rate. We find that the hyperparameter scan prefers the encoding by the LSTM to be rather small, around 32 to 64 units, and the intermediate dense layers are preferred to be small (128-256) and deep (3-4 layers). The final optimized loss function is shown on \cref{fig:loss}.
+In general, the model performance has only a mild dependence on the choice of hyperparameter values. Nevertheless, we scan the hyperparameters by computing a cross-validated mean AUC at each point in a 5-dimensional space, consisting of the size of the LSTM layer, the size of the intermediate dense layers, the number of intermediate dense layers, the amount of dropout and the learning rate. We find that the hyperparameter scan prefers the encoding by the LSTM to be rather small, around 32 to 64 units, and the intermediate dense layers are preferred to be small (128-256) and deep (3-4 layers). The final optimized loss function is shown on~\cref{fig:loss}.
 
 \begin{figure}[ht]
 \centering
@@ -95,7 +95,7 @@ In general, the model performance has only a mild dependence on the choice of hy
 \label{fig:loss} 
 \end{figure} 
 
-One of the free parameters of the model is the length of the input guess sequence. We have studied how this affects the performance of the model by retraining the model on the same dataset, selecting up to $N_{\mathrm{guess}}$ guesses for each user. As expected, the model performs better if more information is provided about the user. We observe a roughly linear relationship between the AUC and the guess sequence length, as can be seen on \cref{fig:seq_length}.
+One of the free parameters of the model is the length of the input guess sequence. We have studied how this affects the performance of the model by retraining the model on the same dataset, selecting up to $N_{\mathrm{guess}}$ guesses for each user. As expected, the model performs better if more information is provided about the user. We observe a roughly linear relationship between the AUC and the guess sequence length, as can be seen on~\cref{fig:seq_length}.
 
 \begin{figure}[ht]
 \centering
@@ -108,7 +108,7 @@ We also study how the amount of training data affects the performance of the mod
 
 \subsubsection{Discussion}
 
-We show the average performance of the RNN model on \cref{fig:roc}, comparing it to the average user model. In general, we see that the neural-network based model is more accurate than the average model, with the average true positive rate improving from 0.38 to 0.54 at an average false positive rate of 0.1.
+We show the average performance of the RNN model on~\cref{fig:roc}, comparing it to the average user model. In general, we see that the neural-network based model is more accurate than the average model, with the average true positive rate improving from 0.38 to 0.54 at an average false positive rate of 0.1.
 
 \begin{figure}[ht]
 \centering
@@ -120,7 +120,7 @@ We show the average performance of the RNN model on \cref{fig:roc}, comparing it
 \label{fig:roc} 
 \end{figure} 
 
-On \cref{fig:user_lu_correct_rate} we see that the per-word and per-user correct rates are also reproduced to a good degree by the model. We can see that the correct rate for users and LUs with a low (high) average correct rate are slightly under (over) estimated. This could result from the model not having enough counterexamples to sufficiently learn the probability distribution $p(\vec{g})$ for very simple or hard words and users with very low or high correct rate. We take this as an example that the model is able to summarize the user and LU population and approximate some useful first-order statistics.
+On~\cref{fig:user_lu_correct_rate} we see that the per-word and per-user correct rates are also reproduced to a good degree by the model. We can see that the correct rate for users and LUs with a low (high) average correct rate are slightly under (over) estimated. This could result from the model not having enough counterexamples to sufficiently learn the probability distribution $p(\vec{g})$ for very simple or hard words and users with very low or high correct rate. We take this as an example that the model is able to summarize the user and LU population and approximate some useful first-order statistics.
 
 \begin{figure}[ht]
 \centering
@@ -132,7 +132,7 @@ On \cref{fig:user_lu_correct_rate} we see that the per-word and per-user correct
 \label{fig:user_lu_correct_rate}
 \end{figure}
 
-Additionally, on \cref{fig:lu_roc_prio} we see that the overall performance of the model is strongly dependent on how many guesses a given word has, with the average ROC AUC dropping significantly for rarer words. This performance degradation is expected, as we can see from \cref{fig:user_lu_distribution} that the number of answers per word drops significantly deeper in the course, reflecting that this model was trained treating each trial equivalently. With increasing guess statistics, it may be worthwhile to investigate a re-weighting of the trials such that words that have fewer trials have a higher weight and would thus still be optimized for in the training. This trend also introduces a natural cut-off in terms of when the predictions from the model are no longer considered reliable.
+Additionally, on~\cref{fig:lu_roc_prio} we see that the overall performance of the model is strongly dependent on how many guesses a given word has, with the average ROC AUC dropping significantly for rarer words. This performance degradation is expected, as we can see from~\cref{fig:user_lu_distribution} that the number of answers per word drops significantly deeper in the course, reflecting that this model was trained treating each trial equivalently. With increasing guess statistics, it may be worthwhile to investigate a re-weighting of the trials such that words that have fewer trials have a higher weight and would thus still be optimized for in the training. This trend also introduces a natural cut-off in terms of when the predictions from the model are no longer considered reliable.
 
 \begin{figure}[ht]
 \centering
@@ -141,7 +141,7 @@ Additionally, on \cref{fig:lu_roc_prio} we see that the overall performance of t
 \label{fig:lu_roc_prio}
 \end{figure}
 
-We see on \cref{fig:lu_roc_guess_proba} that the performance of the model is broadly similar over a wide range of word difficulties. For words that are very easy or difficult, the variance in the trained model is considerable.
+We see on~\cref{fig:lu_roc_guess_proba} that the performance of the model is broadly similar over a wide range of word difficulties. For words that are very easy or difficult, the variance in the trained model is considerable.
 
 \begin{figure}[ht]
 \centering
@@ -150,7 +150,7 @@ We see on \cref{fig:lu_roc_guess_proba} that the performance of the model is bro
 \label{fig:lu_roc_guess_proba}
 \end{figure}
 
-We have also investigated the prediction uncertainty arising from the model. In particular, for a word that is predicted to be known at a knowledge level of $p=0.9$, how certain is the model of this prediction and how much would it vary if the inputs changed slightly? For neural networks, it has been shown that using dropout in the evaluation phase is a good approximation for the inherent prediction uncertainty \cite{gal2016dropout}. On \cref{fig:uncertainty}, we can see the evaluated uncertainty of the guess probability using 10 dropout rounds, compared to the data. It is interesting to see that the 95\% confidence interval around the predicted mean covers the data, however, the predicted mean generally trends lower than the true guess probability.
+We have also investigated the prediction uncertainty arising from the model. In particular, for a word that is predicted to be known at a knowledge level of $p=0.9$, how certain is the model of this prediction and how much would it vary if the inputs changed slightly? For neural networks, it has been shown that using dropout in the evaluation phase is a good approximation for the inherent prediction uncertainty~\cite{gal2016dropout}. On~\cref{fig:uncertainty}, we can see the evaluated uncertainty of the guess probability using 10 dropout rounds, compared to the data. It is interesting to see that the 95\% confidence interval around the predicted mean covers the data, however, the predicted mean generally trends lower than the true guess probability.
 
 \begin{figure}[ht]
 \centering
@@ -159,7 +159,7 @@ We have also investigated the prediction uncertainty arising from the model. In 
 \label{fig:uncertainty}
 \end{figure}
 
-Additionally, we have studied how the amount of training statistics affects the performance of the model. Interestingly, we see that with even as few as 1000 users, the model is able to approximate the knowledge characteristics of an average user. In general, adding more data improves the performance more significantly for words for which there are very few answers provided, as can be seen on \cref{fig:statistics}. Adding more data improves the model performance, especially for words with very low answer rates.
+Additionally, we have studied how the amount of training statistics affects the performance of the model. Interestingly, we see that with even as few as 1000 users, the model is able to approximate the knowledge characteristics of an average user. In general, adding more data improves the performance more significantly for words for which there are very few answers provided, as can be seen on~\cref{fig:statistics}. Adding more data improves the model performance, especially for words with very low answer rates.
 
 ![The effect of the amount of training data on the model performance We investigate 3 cases: 1000 users, 5000 users, 15000 users (full dataset) and plot the performance characteristics of the model (ROC AUC), averaged over words that have a certain fraction of users providing answers.\label{fig:statistics}](figures/statistics.pdf){ width=50% }
 
@@ -171,7 +171,7 @@ As possible future improvements, extending the information in the word feature v
 
 We have shown that by formulating the problem of predicting existing knowledge as a sequence-to-vector binary classification problem, recurrent neural networks present a simple and flexible solution applicable to a wide variety of cases. A single model architecture is able to predict knowledge probabilities of thousands of words based on just a small amount of randomly chosen guesses. The RNN model is easily extensible, should more information about words or users become available. In particular, we see extension to predicting knowledge in multiple languages simultaneously as a possible future improvement. 
 
-Having produced a model capable of estimation, it is interesting to study the explanatory factors of that model. In general, explaining the decisions or predictions of complex "black box" models is an open research topic. Recently, locally interpretable linear models have been proposed as a way of explaining the features a model makes use of for particular predictions\cite{ribeiro2016should}. We have used the method to validate our trained model on a few examples and see that it uses guess information in an intuitively correct way, as can be see on \cref{fig:lime}.
+Having produced a model capable of estimation, it is interesting to study the explanatory factors of that model. In general, explaining the decisions or predictions of complex "black box" models is an open research topic. Recently, locally interpretable linear models have been proposed as a way of explaining the features a model makes use of for particular predictions\cite{ribeiro2016should}. We have used the method to validate our trained model on a few examples and see that it uses guess information in an intuitively correct way, as can be see on~\cref{fig:lime}.
 
 \begin{figure}[ht]
 \label{fig:lime}

@@ -30,11 +30,13 @@
 
 \usepackage[
     hyperref=true,
-    url=false,
+    url=true,
     isbn=false,
     backref=true,
-    style=numeric-comp,
-    block=none
+    style=numeric,
+    block=none,
+    doi=true,
+    eprint=true
 ]{biblatex}
 \bibliography{bibliography}
 
@@ -69,9 +71,9 @@
 
 %\input{intro.tex}
 \input{btag.tex}
-%\input{mem.tex}
-%\input{tth.tex}
-%\input{lingvist.tex}
+\input{mem.tex}
+\input{tth.tex}
+\input{lingvist.tex}
 
 \newpage
 \printbibliography
