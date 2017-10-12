@@ -54,8 +54,9 @@
 
 \usepackage{multirow,bigdelim} %tabelisse veergude-ridade ühendamine
 
-%iga uus sektsioon algab uuelt lehelt
-\let\stdsection\section
+%https://tex.stackexchange.com/questions/9497/start-new-page-with-each-section
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
 
 %\usepackage[toc,nonumberlist,acronym]{glossaries}
 
@@ -69,11 +70,18 @@
 \tableofcontents
 \newpage
 
+\listoffigures
+ 
+\listoftables
+
 %\input{intro.tex}
-\input{btag.tex}
-\input{mem.tex}
-\input{tth.tex}
-\input{lingvist.tex}
+%\input{theory.tex}
+\input{experiment.tex}
+
+%\input{btag.tex}
+%\input{mem.tex}
+%\input{tth.tex}
+%\input{lingvist.tex}
 
 \newpage
 \printbibliography
