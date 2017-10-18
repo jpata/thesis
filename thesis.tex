@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt]{book}
 %\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
@@ -28,6 +28,8 @@
 \usepackage{hyperref} %klikitavad lingid
 \usepackage{cleveref}
 
+\usepackage{gensymb}
+
 \usepackage[
     hyperref=true,
     url=true,
@@ -48,15 +50,15 @@
 % \textwidth 16.59cm
 % \textheight 21.94cm
 %\pagestyle{fancyplain}
-\linespread{1.5}
+\linespread{1.2}
 %\parindent 0.5cm
 
 
 \usepackage{multirow,bigdelim} %tabelisse veergude-ridade ühendamine
 
 %https://tex.stackexchange.com/questions/9497/start-new-page-with-each-section
-\usepackage{titlesec}
-\newcommand{\sectionbreak}{\clearpage}
+%\usepackage{titlesec}
+%\newcommand{\sectionbreak}{\clearpage}
 
 %\usepackage[toc,nonumberlist,acronym]{glossaries}
 
@@ -75,15 +77,14 @@
 \listoftables
 
 %\input{intro.tex}
-%\input{theory.tex}
+\input{theory.tex}
 \input{experiment.tex}
+\input{btag.tex}
+\input{mem.tex}
+\input{tth.tex}
+\input{lingvist.tex}
 
-%\input{btag.tex}
-%\input{mem.tex}
-%\input{tth.tex}
-%\input{lingvist.tex}
-
-\newpage
+\chapter{Bibliography}
 \printbibliography
 
 \end{document}
