@@ -1,10 +1,16 @@
-\documentclass[12pt]{book}
-%\usepackage[T1]{fontenc}
+\documentclass[
+  a4paper,
+  BCOR=15mm,
+  bibliography=totoc,
+  numbers=noenddot,
+  headings=optiontotocandhead,
+  twoside
+]{scrbook}
+
 \usepackage[utf8]{inputenc}
 
 \usepackage{ifpdf}
 \usepackage{listings}
-\usepackage[small,bf]{caption}
 \usepackage[titletoc]{appendix}
 \usepackage{endnotes}
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
@@ -23,12 +29,26 @@
 \usepackage{subfloat}
 
 \usepackage{amssymb}
-\usepackage{cancel}
+\usepackage{cancel} %for slash
 
 \usepackage{hyperref} %klikitavad lingid
 \usepackage{cleveref}
+\usepackage{xspace}
+\usepackage{booktabs} % Enhanced tables with \toprule, etc.
 
 \usepackage{gensymb}
+
+% headings
+% \usepackage{scrpage2}
+% \pagestyle{scrheadings}
+
+% captions
+\usepackage{caption}
+  \captionsetup{labelfont=bf}
+  \captionsetup{font=small}
+  \captionsetup{format=plain}
+  \captionsetup{labelsep=endash}
+
 
 \usepackage[
     hyperref=true,
@@ -45,13 +65,13 @@
 \hypersetup{colorlinks=true, linktoc=page}
 
 %\topmargin -1.5cm
-% \oddsidemargin -0.1cm
-% \evensidemargin -0.1cm
+%\oddsidemargin -0.1cm
+%\evensidemargin -0.1cm
 % \textwidth 16.59cm
 % \textheight 21.94cm
 %\pagestyle{fancyplain}
 \linespread{1.2}
-%\parindent 0.5cm
+\parindent 0.5cm
 
 
 \usepackage{multirow,bigdelim} %tabelisse veergude-ridade ühendamine
@@ -62,6 +82,9 @@
 
 %\usepackage[toc,nonumberlist,acronym]{glossaries}
 
+%\widowpenalties 1 10000
+%\raggedbottom
+
 \input{macros.tex}
 
 \begin{document}
@@ -71,20 +94,18 @@
 
 \tableofcontents
 \newpage
-
 \listoffigures
- 
 \listoftables
 
 %\input{intro.tex}
-\input{theory.tex}
-\input{experiment.tex}
-\input{btag.tex}
+% \input{theory.tex}
+% \input{experiment.tex}
+% \input{btag.tex}
 \input{mem.tex}
-\input{tth.tex}
-\input{lingvist.tex}
+% \input{tth.tex}
+% \input{lingvist.tex}
 
-\chapter{Bibliography}
+\newpage
 \printbibliography
 
 \end{document}
