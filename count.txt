@@ -10,3 +10,39 @@ Number of math inlines: 842
 Number of math displayed: 54
 Files: 9
 ---
+Thu Oct 19 14:06:55 CEST 2017
+Total
+Sum count: 31021
+Words in text: 26578
+Words in headers: 262
+Words outside text (captions, etc.): 3276
+Number of headers: 100
+Number of floats/tables/figures: 62
+Number of math inlines: 849
+Number of math displayed: 56
+Files: 9
+---
+Thu Oct 19 15:14:27 CEST 2017
+Total
+Sum count: 31365
+Words in text: 26784
+Words in headers: 263
+Words outside text (captions, etc.): 3415
+Number of headers: 100
+Number of floats/tables/figures: 63
+Number of math inlines: 847
+Number of math displayed: 56
+Files: 9
+---
+Thu Oct 19 19:59:09 CEST 2017
+Total
+Sum count: 31924
+Words in text: 27069
+Words in headers: 263
+Words outside text (captions, etc.): 3678
+Number of headers: 100
+Number of floats/tables/figures: 66
+Number of math inlines: 858
+Number of math displayed: 56
+Files: 9
+---

@@ -14,4 +14,4 @@ count:
 	texcount -sum *.tex | grep -A9 Total >> count.txt
 	echo "---" >> count.txt
 
-.PHONY: clean
+.PHONY: thesis clean

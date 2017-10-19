@@ -59,7 +59,7 @@ To address the first issue, we need to use parton density functions~$g(x_{1,2})$
 In order to take into account detector effects, we integrate over unmeasured or poorly measured quantities using a transfer function~$W(\vec{y}, \vec{p})$.
 The transfer function relates final state parton-level quantities~$\vec{p}$ to measurable quantities on the detector level~$\vec{y}$ and encodes our knowledge about detector resolution or reconstruction efficiencies.
 
-The question of jet-to-parton matching is addressed by summing over the~$N_a$ possible permutations of jet-to-parton matching, which depends on assumptions about the process and the number of observed final state particles and is encoded in the exact factorized form of the transfer function~$W(\vec{y}, \vec{p})$.
+The question of jet-to-parton matching is addressed by summing over the~$N_a$ possible combinations of jet-to-parton matching, which depends on assumptions about the process and the number of observed final state particles and is encoded in the exact factorized form of the transfer function~$W(\vec{y}, \vec{p})$.
 
 Finally, the modelling of the non-zero transverse recoil~$\vec{\rho}_T = -\sum_{i=1}^n \vec{p}_{i,T}$ is treated empirically using a transfer function~$\mathcal{R}(\tilde{\vec{\rho}}_T, \vec{\rho}_T)$ determined on simulation that relates the parton-level transverse momentum of the system~$\vec{\rho}_T$ to the observed recoil~$\tilde{\vec{\rho}}_T$. 
 
@@ -137,7 +137,7 @@ where~$q_i$ ($\ell_i$) is shorthand for the quark (charged lepton) assumed to gi
 \label{eq:tf_combination_sum}
 W_{i,j} \propto \sum_{q_i \in \mathrm{quarks}} W(E_i, \vec{e}_i | E_{q_i}, \vec{e}_{q_i}).
 \end{equation}
-In particular, we make no assumption on jet charge, therefore, to assign out of 4 reconstructed b-jets 2 to the quarks from~$\Hbb$, we have~$4!/2!2! = 6$ combinations. Without distinguishing between~$\mathrm{b}$ and~$\bar{\mathrm{b}}$, we have a further~$2!/1!1!$ ways of assigning the b-tagged jets to bottom quarks from the top or antitop quarks, such that assigning the fully reconstructed~\ttHbb~hypothesis with 4 b~quarks and 2 light quarks among 6 jets amounts to 12 combinations. We describe the approach taken to reducing the number of required combinations further in~\cref{sec:event_interpretation}.
+In particular, we make no assumption on jet charge, therefore, to assign out of 4 reconstructed b-jets 2 to the quarks from~$\Hbb$, we have~$4!/2!2! = 6$ combinations. Without distinguishing between~$\mathrm{b}$ and~$\bar{\mathrm{b}}$, we have a further~$2!/1!1!$ ways of assigning the b~tagged jets to bottom quarks from the top or antitop quarks, such that assigning the fully reconstructed~\ttHbb~hypothesis with 4 b~quarks and 2 light quarks among 6 jets amounts to 12 combinations. We describe the approach taken to reducing the number of required combinations further in~\cref{sec:event_interpretation}.
 
 Lepton energies and directions are measured with an order of magnitude higher resolution than jet energies, therefore we assume those to be perfectly measured so that their transfer functions are Dirac delta functions.
 Furthermore, we assume that the jet energy and angular transfer functions can be factorized such that
@@ -227,9 +227,9 @@ Sudakov reweighting allows us to approximate the effects of ISR in the scatterin
 \begin{equation}
 W(p_T) = \frac{1}{\sqrt{2\pi} \sigma p_T} \exp \biggl[ \frac{-(\ln{p_T/1~\mathrm{GeV}} - \mu)^2}{2\sigma^2}\biggr]
 \end{equation}
-that estimates the probability of the parton-level transverse momentum~$p_T$ resulting in an observed recoil~$\rho_T$ below an experimental threshold~$\rho_{T,0} < 30~\mathrm{GeV}$, taking into account detector resolution. Here the the values~$\mu = 4.1$ and~$\sigma = 1.35$ are estimated from MC simulation and the unknown momentum ISR momentum~$p_T$ is integrated out. We have implemented this empirical factor and compared it with the nominal LO MEM. In case a significant missing transverse momentum is observed, a separate double-Gaussian transfer function would be appropriate. However, since we independently have to consider a transfer function for the MET due to the presence of neutrinos, the modelling of ISR can be absorbed in the recoil transfer function, as explained in~\cref{sec:transfer_functions}.
+that approximates the probability of the parton-level transverse momentum~$p_T$ resulting in an observed recoil~$\rho_T$ below an experimental threshold~$\rho_{T,0} < 30~\mathrm{GeV}$, taking into account detector resolution. Here the the values~$\mu = 4.1$ and~$\sigma = 1.35$ are estimated from MC simulation and the unknown momentum ISR momentum~$p_T$ is integrated out. We have implemented this empirical factor and compared it with the nominal LO MEM, however, we have seen that the changes are very small and compatible with MC statistical uncertainties. 
 
-\fixme Plot of nominal, Sudakov, Recoil, additional diagrams, ttH only.
+In case a significant missing transverse momentum is observed in the event, a separate double-Gaussian transfer function would be appropriate in the Sudakov factor. However, since we independently have to consider a transfer function for the MET due to the presence of neutrinos, the modelling of ISR recoil can be absorbed in the MET recoil transfer function, as explained in~\cref{sec:transfer_functions}.
 
 \subsection{Event interpretations}
 \label{sec:event_interpretation}
@@ -273,37 +273,36 @@ We use a number of strategies to restrict the number of combinations that need t
 
 \begin{itemize}
 \item As we are dealing with up to 2 oppositely-charged leptons, we can neglect the small effect of charge confusion and assume the leptons are identified perfectly in case of a dileptonic event.
-\item We assume that the efficiency of correctly b-tagging jets arising from bottom quarks (mistagging light jets) is sufficiently high (low) that we find bottom quark (light quark) candidates only among b-tagged (untagged) jets.
+\item We assume that the efficiency of correctly b~tagging jets arising from bottom quarks (mistagging light jets) is sufficiently high (low) that we find bottom quark (light quark) candidates only among b~tagged (untagged) jets.
 \item If we have more than 3 candidates for the light quarks, we select the 3 that are most compatible with a~$\mathrm{W} \rightarrow \mathrm{q}\mathrm{q}'$ decay according to invariant mass.
-\item We take note that the scattering amplitude~$|\mathcal{M}|^2$ is symmetric under charge exchange, therefore, we only compute the scattering amplitude with only one permutation corresponding to a particular charge assignment of quarks.
+\item We take note that the scattering amplitude~$|\mathcal{M}|^2$ is symmetric under charge exchange, therefore, we only compute the scattering amplitude with only one combination corresponding to a particular charge assignment of quarks.
 \end{itemize}
-The jets are assumed to be b~tagged or untagged by choosing the set of jets that is most compatible with arising from a 4 b~quark hypothesis using a likelihood ratio based on jet b~discriminators, as will be explained further in~\cref{sec:object_id_btag}. Overall, the number of MEM combinations that are required for each hypothesis in the categories we use is show in~\cref{tab:category_combinations}. These assumptions are found not to reduce the performance of the MEM significantly, but they decrease the number of permutations (and thus computational burden) by an order of magnitude, as seen on figure~\cref{fig:mem_assumptions}.
+The jets are assumed to be b~tagged or untagged by choosing the set of jets that is most compatible with arising from a 4 b~quark hypothesis using a likelihood ratio based on jet b~discriminators, as will be explained further in~\cref{sec:object_id_btag}. Overall, the number of transfer function combinations that are required for each hypothesis in the categories we use is show in~\cref{tab:category_combinations}. These assumptions are found not to reduce the performance of the MEM significantly, but they decrease the number of combinations (and thus computational burden) by an order of magnitude, as seen on figure~\cref{fig:mem_assumptions}. In fact, we find that being more strict with the assumptions can help boost the discriminating power of the MEM, as it helps to separate the more probable combinations from the less probable ones in the combination sum in~\cref{eq:tf_combination_sum}.
 
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{c|cccc}
+\begin{tabular}{c|ccccc}
 \hline
-interpretation & 7 jets & 6 jets & 5 jets & 4 jets \\
+interpretation& 8+ jets & 7 jets & 6 jets & 5 jets & 4 jets \\
 \hline
-SL~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & 36 & 12 & - & - \\
-SL~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & - & - & 12 & -\\
-SL~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & - & - & - & 12 \\
-SL~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}+1\mathrm{g}$ & 32 & - & - & - \\
+SL~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & 72/36 & 36 & 12 & - & - \\
+SL~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & - & - & - & 12 & -\\
+SL~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & - & - & - & - & 12 \\
+SL~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}+1\mathrm{g}$ & 72/36 & 36 & - & - & - \\
 \hline
-DL~$2_{\mathrm{h}} 2_{\mathrm{t}}$ & - & - & - & 12 \\
+DL~$2_{\mathrm{h}} 2_{\mathrm{t}}$ & 12 & 12 & 12 & 12 & 12 \\
 \hline
 \hline
 \end{tabular}
-\caption[The number of MEM combinations in different categories]{The number of MEM combinations in associating quarks to jet for various MEM categories. In events with 7 or more jets, we choose up to 3 candidates based on invariant mass among the light jets for the W-boson reconstruction, in order to bound the number of permutations.}
+\caption[The number of MEM combinations in different categories]{The number of MEM combinations in associating quarks to jet for various MEM categories. In SL events with 7 or more jets, we choose up to 4 candidates based on invariant mass among the light jets for the W-boson reconstruction, in order to prevent a combinatorial explosion for events with a very high jet multiplicity. In DL events, we always choose exactly 4 candidates for the b~quarks.}
 \label{tab:category_combinations}
 \end{center}
 \end{table}
 
 \begin{figure}
 \begin{centering}
-\subfloat[fig 1]{\includegraphics[width=0.5\textwidth]{figures/jetsByPt_0_pt.pdf}} 
-\subfloat[fig 2]{\includegraphics[width=0.5\textwidth]{figures/jetsByPt_0_pt.pdf}}\\
-\caption{\fixme MEM assumptions}
+\includegraphics[width=0.5\textwidth]{figures/mem/mem_assumptions.pdf}
+\caption[The effect of combinations assumptions in the MEM]{The effect of combination assumptions in the MEM discriminator based on~\ttHbb~simulation. We compare the nominal case (red), where the combinations are restricted according to b~tagging and assuming a single charge assignment, with the case where the charge assignment restriction is removed (green, 48 combinations) and the case where the b~tagging restriction is removed (blue, 180 combinations). We see that the charge assignment has negligible effect on the overall discriminator shape, whereas the b~tagging significantly increases number of permutations and thus reduces the discriminating power of the MEM.}
 \label{fig:mem_assumptions}
 \end{centering}
 \end{figure}
@@ -311,35 +310,56 @@ DL~$2_{\mathrm{h}} 2_{\mathrm{t}}$ & - & - & - & 12 \\
 \subsection{Integration}
 \label{sec:mem_integration}
 
-The MEM is implemented as a dedicated code in C++, relying on the~\texttt{OpenLoops}~library~\cite{Cascioli:2011va} interfaced via C++ for the evaluation of the hard scattering amplitude. The~\texttt{ROOT}~package~\cite{Brun:1997pa} is used for numerical Lorentz algebra and~\texttt{CLING}~\cite{Vasilev:2012ev} for interfacing the code to Python with the rest of the analysis. The PDFs are evaluated using the~\texttt{cteq66} set via the~\texttt{LHAPDF}~package~\cite{Buckley:2014ana}. The numerical integration routines rely on the~\texttt{VEGAS}~algorithm~\cite{Lepage:1977sw} that uses multiple passes to refine the integration grid, with the maximal number of evaluations tuned for approximately~$\Delta I / I < 2.5 \dots 5\%$ relative numerical accuracy on the integral, suitable for use in a discriminator. We use the~\texttt{CUBA}~package~\cite{Hahn:2004fe} for numerical integration, as it supports vector-valued integrands. The distribution of expected numerical accuracy is shown on~\cref{fig:mem_numerical_accuracy} and illustrates the convergence of the numerical integration. We see that the computational cost is around 1-2 CPU minutes per event including both the signal and background hypotheses and that the numerical integration is accurate to within~$5\%$ on average. Transfer functions can be provided in a flexible parametrisation using \texttt{ROOT}, however, as described in~\cref{sec:mem_optimisation}, we have also provided faster, optimised versions of the Gaussian transfer functions.
+The MEM is implemented as a dedicated code in C++, relying on the~\texttt{OpenLoops} library~\cite{Cascioli:2011va} interfaced via C++ for the evaluation of the hard scattering amplitude. The~\texttt{ROOT} package~\cite{Brun:1997pa} is used for numerical Lorentz algebra and~\texttt{CLING}~\cite{Vasilev:2012ev} for interfacing the code to Python with the rest of the analysis. The PDFs are evaluated using the~\texttt{cteq66} set via the~\texttt{LHAPDF}~package~\cite{Buckley:2014ana}. The numerical integration routines rely on the~\texttt{VEGAS}~algorithm~\cite{Lepage:1977sw} that uses multiple passes to refine the integration grid, with the maximal number of evaluations tuned for approximately~$\Delta I / I < 2.5 \dots 5\%$ relative numerical accuracy on the integral, suitable for use in a discriminator. We use the~\texttt{CUBA}~package~\cite{Hahn:2004fe} for numerical integration, as it supports vector-valued integrands. The distribution of expected numerical accuracy is shown on~\cref{fig:mem_numerical_accuracy} and illustrates the convergence of the numerical integration. We see that the computational cost is around 1-2 CPU minutes per event including both the signal and background hypotheses and that the numerical integration is accurate to within~$5\%$ on average. Transfer functions can be provided in a flexible parametrisation using \texttt{ROOT}, however, as described in~\cref{sec:mem_optimisation}, we have also provided faster, optimised versions of the Gaussian transfer functions.
 
-In~\cref{sec:mem_implementation} we have expressed the integral~\cref{eq:mem_definition}~in terms of variables which are aligned with the peaks of the integrand. In general, we could integrate over the full allowable range of these variables, however, to improve convergence, we restrict the integration over energies to a symmetric confidence region based on the transfer functions. In particular, we derive the lower~($E_L(E_j,\alpha)$)~and upper~($E_L(E_j,\alpha)$)~integration boundaries for a jet with energy~$E_j$ from
+In~\cref{sec:mem_implementation} we have expressed the integral~\cref{eq:mem_definition}~in terms of variables which are aligned with the peaks of the integrand. In general, we could integrate over the full allowable range of these variables, however, to improve convergence, we restrict the integration over energies to a symmetric confidence region around the reconstructed energy based on the transfer functions. In particular, we derive the lower~($E_L(E_j,\alpha)$)~and upper~($E_L(E_j,\alpha)$)~integration boundaries for a jet with energy~$E_j$ from
 
 \begin{equation}
 \int_{E_L(E_j,\alpha)}^{E_H(E_j,\alpha)} \mathrm{d}E_q W(E_j | E_q) = \alpha
 \end{equation}
 with~$\alpha = 0.95$ and choose the integration variable~$x_q$ for the quark energy such that~$E_q(x_q) = E_L + x_q (E_H - E_L)$, to restrict the integration into the range~$x\in[0,1]$ as required by the VEGAS algorithm. The integration with respect to the angular variables is performed over the ranges~$\phi \in [-\pi, +\pi]$ and~$\cos{\theta} \in [-1, +1]$.
 
+\subsubsection{VEGAS algorithm}
+In computing the full ME scattering amplitude and transfer function convolution of~\cref{eq:mem_definition}, we rely on numerical MC integration for the results. The integral is approximated by a weighted sum over sampled points~$\mathbf{x}_i$ such that
+
+\begin{equation}
+I = \int f(\mathbf{x})\ \mathrm{d}\mathbf{x} \simeq \tilde{I} = \frac{1}{N} \sum_{i}^N w_i f(\mathbf{x}_i).
+\end{equation}
+The variance in the estimation $\tilde{I}$ is given by
+
+$$\mathrm{Var}(\tilde{I}) = \frac{\mathrm{Var}(f)}{N};\ \mathrm{Var}(f) = \frac{1}{N-1} \sum_i^N(f(\mathbf{x}_i) - \langle f \rangle)^2$$
+in case $w_i = 1$. Choosing the weights appropriately allows the variance to be reduced, such that for $w_i = \frac{|f(\mathbf{x}_i)|}{\int f \mathrm{d}\mathbf{x}}$, the variance disappears. The VEGAS implementation in CUBA relies on importance sampling, which increases the amount of points where $|f|$ is large, by constructing the weights as a piecewise constant function in the integration hypercube, refined by iteratively increasing the number of integration samples. We use between $\mathcal{O}(10^3)$ and $\mathcal{O}(5 \times 10^4)$ integration points in 5 successive stages. An example of the final VEGAS integration grid is shown on figure~\cref{fig:vegas_grid}, where we see that the integration points are clustered around $\alpha=0.5$, which corresponds to an on-peak quark reconstruction $E_q = E_j$ and somewhat more spread out in the neutrino polar angle. We can see that the peak dimensions are aligned with the integration axes by the construction of the Jacobian, which is necessary for efficient integral evaluation via VEGAS.
+
+\begin{figure}[ht]
+\begin{centering}
+\includegraphics[width = 0.4\textwidth]{figures/mem/vegas_grid.pdf}
+\caption[VEGAS grid example]{An example of the VEGAS integration weights in the plane defined by the light quark energy fraction and neutrino polar angle.}
+\label{fig:vegas_grid}
+\end{centering}
+\end{figure}
+
 \begin{figure}
 \begin{centering}
 \subfloat[Integration time of the MEM.]{\includegraphics[width = 0.5\linewidth]{figures/mem/mem_time.pdf}} 
 \subfloat[Numerical uncertainty of the MEM]{\includegraphics[width = 0.5\linewidth]{figures/mem/mem_error.pdf}}\\
-\caption[The MEM integration time.]{The integration time (\textbf{a}) and uncertainty resulting from numerical integration (\textbf{b}) of the MEM discriminator for the fully reconstructed hypothesis. In general, we see that the average time to compute the MEM discriminator is below 1 minute for both the signal and background hypotheses, with a significant spread due to the varying number of jets in events and thus the number of permutations that need to be considered. The background hypothesis is significantly more computationally expensive, due to the complexity of the~\ttbb~diagrams compared to~\ttHbb. The numerical uncertainty is below~$5\%$ on average for both the signal and background hypotheses, with a larger spread for the background hypothesis.}
+\caption[The MEM integration time.]{The integration time (\textbf{a}) and uncertainty resulting from numerical integration (\textbf{b}) of the MEM discriminator for the fully reconstructed hypothesis. In general, we see that the average time to compute the MEM discriminator is below 1 minute for both the signal and background hypotheses, with a significant spread due to the varying number of jets in events and thus the number of combinations that need to be considered. The background hypothesis is significantly more computationally expensive, due to the complexity of the~\ttbb~diagrams compared to~\ttHbb. The numerical uncertainty is below~$5\%$ on average for both the signal and background hypotheses, with a larger spread for the background hypothesis.}
 \label{fig:mem_numerical_accuracy}
 \end{centering}
 \end{figure}
+
+For the SL~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$~signal hypothesis, the integration is carried over 4 variables: the top-associated light quark energy $E_{q_t}$, the neutrino directions $\cos{\theta_\nu}$ and $\cos{\phi_\nu}$ and the energy of the Higgs-associated b~quark $E_{b_H}$. An additional axis is introduced for the~\ttbb~hypothesis, integrating over the energy of the second b~quark not associated to top quark decay~$(E_{\bar{b}_H}$). The addition of each lost quark adds an additional energy integration, such that for the~SL~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$~hypothesis, we have 6 integration dimensions for the~\ttHbb~hypothesis and 7 for the~\ttbb~hypothesis. In the dileptonic channel, the DL~$2_{\mathrm{h}} 2_{\mathrm{t}}$~signal hypothesis has 5 integration variables: 2 angles per neutrino, plus the energy of one of the Higgs-associated b-quarks~$E_{b_H}$.
 
 \subsection{Profiling and optimisation}
 \label{sec:mem_optimisation}
 
 In order to optimise the MEM code, we have used the~\texttt{igprof}~sampling profiler~\cite{Eulisse:2005zz,Tuura:2008zza} to analyse the computational budget spent in various subroutines of the code. In general, we find    
-that the overwhelming majority of time is spent within the integrand, out of which about 40\% is spent computing the transfer functions, 35\%~is~spent evaluating the scattering amplitude of the hard process, 10\%~on~computing the PDFs and about~10\%~on~manipulating the phase space volume. The evaluation of the transfer functions at a single phase space point is about an order of magnitude faster than the scattering amplitude. In order to achieve this ratio, we implemented the transfer functions explicitly as optimised C++ functions, instead of relying on a more generic approach using symbolic functions supported in ROOT. Additionally, a large part of time optimising the integration grid is spent in evaluating the exponential tails of the transfer function, we have used a piecewise exponential function that is suppressed far in the tails.
+that the overwhelming majority of time is spent within the integrand, out of which about 40\% is spent computing the transfer functions, 35\%~is~spent evaluating the scattering amplitude of the hard process, 10\%~on~computing the PDFs and about~10\%~on~manipulating the phase space volume. The evaluation of the transfer functions at a single phase space point is about an order of magnitude faster than the scattering amplitude. In order to achieve this ratio, we implemented the transfer functions explicitly as optimised C++ functions, instead of relying on a more generic approach using symbolic functions supported in ROOT. Additionally, as a large part of time optimising the integration grid is spent in evaluating the exponential tails of the transfer function, we have used a piecewise exponential function that is suppressed far in the tails.
 
 Currently, the MEM algorithm as implemented here can only be run on standard x86 CPU architectures. Although it has been shown that GPUs may offer strong parallelization benefits in evaluating the integral, it would be necessary to completely port and optimise the~\texttt{OpenLoops} toolset, or another ME library, on the GPU in a significant engineering effort~\cite{Schouten:2014yza}, furthermore, GPU clusters are currently not commonplace in the Worldwide LHC Grid (WLCG), limiting the applicability of the code. However, in the future, as massively parallelized resources and automatic code translation tools become more widely available, the phase space integration could benefit significantly from parallel resources.
 
 \subsection{Computational budget}
 \label{sec:mem_computational}
-In this section, we present a feasibility estimation on using the MEM in a Run II analysis. This is necessary in order to predict the amount of computing resources that will be required. The computing time depends strongly on the number of permutations and integration variables needed for a given interpretation and event topology, as well as the total number of MC simulated events that are needed for the analysis. In~\cref{tab:mem_cpu_budget}, we show the required CPU budget for evaluating the MEM on various event topologies. Based on this, we identify the MEM interpretations to apply on a given event topology. In particular, we see that the treatment of the additional gluon radiation in the MEM diagram increases the computational cost by about a factor of 5, mainly from the~\ttbb~amplitude. Furthermore, we find that computing the MEM with a hypothesis that considers all the reconstructed jets provides the best trade-off between performance and computing cost.
+In this section, we present a feasibility estimation on using the MEM in a Run II analysis. This is necessary in order to predict the amount of computing resources that will be required. The computing time depends strongly on the number of combinations and integration variables needed for a given interpretation and event topology, as well as the total number of MC simulated events that are needed for the analysis. In~\cref{tab:mem_cpu_budget}, we show the required CPU budget for evaluating the MEM on various event topologies. Based on this, we identify the MEM interpretations to apply on a given event topology. In particular, we see that the treatment of the additional gluon radiation in the MEM diagram increases the computational cost by about a factor of 5, mainly from the~\ttbb~amplitude. Furthermore, we find that computing the MEM with a hypothesis that considers all the reconstructed jets provides the best trade-off between performance and computing cost.
 
 \begin{table}[h!]
 \begin{center}
@@ -364,7 +384,7 @@ DL,~$\ge4$jet,~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ &~$55.7 \pm 13.7$ 
 \label{tab:mem_cpu_budget}
 \end{table}
 
-\subsection{Uncertainties}
+\subsection{Propagating uncertainties}
 \label{sec:mem_uncertainties}
 
 When using the MEM in a realistic experimental analysis, we need to evaluate the effect of systematic uncertainties on the MEM. In general, uncertainties modify the observables~$\vec{y} \rightarrow \vec{y}^*$, for example the jet energies may be modified by uncertainties in the jet energy scale calibration. The naive approach to estimate the sensitivity of the discriminator would be to recompute the MEM discriminator weights~$P(\vec{y}) \rightarrow P(\vec{y}^*)$. However, this turns out to be impractical, since the number of individual variations that need to be considered can easily reach~$\mathcal{O}(10^2)$ and it is not realistic or practical to expend two orders of magnitude more computational resources.
@@ -381,14 +401,31 @@ Furthermore, we see from~\cref{eq:mem_definition} that the observables enter the
   W(\vec{y} + \delta \vec{y}_n | \vec{p})
  \end{pmatrix}
 \end{equation}
-and the integration of the nominal and variated weight can be performed in a single pass using a a grid optimised for the whole integration. We have tested this approach by comparing the variation evaluated using vector integration to the full computation with shifted inputs. As we wish to estimate the sensitivity of the analysis to this uncertainty, it is sufficient if the approximated variation has the same magnitude and direction as the true variation.
+and the integration of the nominal and variated weight can be performed in a single pass using a a grid optimised for the whole integration. We have tested this approach by comparing the variation evaluated using vector integration to the full computation with shifted inputs, showing the comparison of the full variation and the approximation on~\cref{fig:jes_variation}. As we wish to estimate the sensitivity of the analysis to this uncertainty, it is sufficient if the approximated variation has the same magnitude and direction as the true variation.
 
-Additional complexity is introduced due to variations in the uncertainties possibly changing the topology of the reconstructed final state, as scaling jet energies down may cause jets to migrate under the experimental threshold~$p_{T\mathrm{cut}}$. In order to account for this, in case a particular variation~$\vec{y} + \delta \vec{y}_n$ changes the reconstructed final state, the MEM is still recomputed using the new topology.
+\begin{figure}[ht]
+\begin{centering}
+\subfloat[Up-variation]{\includegraphics[width = 0.5\textwidth]{figures/mem/jesup_variation.pdf}}
+\subfloat[Down-variation]{\includegraphics[width = 0.5\textwidth]{figures/mem/jesdown_variation.pdf}}\\
+\caption[The distributions of the MEM signal and background probabilities]{The effect of JES variations up and down variations on the MEM signal probability for the signal hypothesis with the full computation (blue) and with the vector integration approximation method. We see that both the up and down shifts have the correct direction and magnitude. This estimation is done on~\ttHbb~simulation with exactly 6 jets and exactly 4 b~tags, requiring that the jet variations do not change the jet multiplicity in the final state.}
+\label{fig:jes_variation}
+\end{centering}
+\end{figure}
+
+Additional complexity is introduced due to variations in the uncertainties possibly changing the topology of the reconstructed final state, as scaling jet energies down may cause jets to migrate under the experimental threshold~$p_{T\mathrm{cut}}$. In order to account for this, in case a particular variation~$\vec{y} + \delta \vec{y}_n$ changes the reconstructed final state, the MEM is still recomputed using the new topology. On~\cref{fig:jes_variation_ratio}, we compare the fully variated MEM discriminator to the approximation, taking into account these jet multiplicity migrations.
+
+\begin{figure}[ht]
+\begin{centering}
+\subfloat[Up-variation]{\includegraphics[width = 0.5\textwidth]{figures/mem/jesup_ratio_mem.pdf}}
+\subfloat[Down-variation]{\includegraphics[width = 0.5\textwidth]{figures/mem/jesdown_ratio_mem.pdf}}\\
+\caption[The full variation in the MEM discriminator]{The effect of JES variations up and down variations on the MEM discriminator (likelihood ratio) with the full computation (blue) and with the vector integration approximation method. As before, We see that both the up and down shifts have the correct direction and magnitude. The differences are not significant, compared to the MC statistical uncertainty. This estimation is done on~\ttHbb~simulation with at least 6 jets and at least 4 b~tags, taking into account possible bin-to-bin migrations.}
+\label{fig:jes_variation_ratio}
+\end{centering}
+\end{figure}
 
 \subsection{MEM on the WLCG}
 
-From the computational cost of the MEM shown in~\cref{sec:mem_computational}~it is apparent that it is necessary to use distributed computing systems in order to have a reasonable turn-around time for the analysis. Therefore, we have parallelized the workflow both on the level of a computing cluster using \texttt{grid-control} and the WLCG using \texttt{CRAB}. On the WLCG, we have thus been able to take advantage of CMS computing resources opportunistically and have demonstrated that the MEM as implemented here is able to run on a wide range of data centres on a planetary scale. For this, we relied on \texttt{CMSSW} to provide a consistent environment along with user-provided external dependencies such as \texttt{OpenLOOPS}. We integrated the MEM into a multi-step workflow that produced the final analysis data sets directly from CMS \texttt{MiniAOD} in a single pass on the WLCG. This way, we were able to benefit from load balancing using data locality in CMS and reduced the number of manual intermediate steps and data management, which can be error prone.
-% asdasd~\ttH
+From the computational cost of the MEM shown in~\cref{sec:mem_computational}~it is apparent that it is necessary to use distributed computing systems in order to have a reasonable turn-around time for the analysis. Therefore, we have parallelized the workflow both on the level of a computing cluster using \texttt{grid-control} and the WLCG using \texttt{CRAB}. On the WLCG, we have thus been able to take advantage of CMS computing resources opportunistically and have demonstrated that the MEM as implemented here is able to run on a wide range of data centres on a planetary scale. For this, we relied on \texttt{CMSSW} to provide a consistent environment along with user-provided external dependencies such as \texttt{OpenLOOPS}. We integrated the MEM into a multi-step workflow that produced the final analysis data sets directly from the CMS MiniAOD data stage in a single pass on the WLCG. This way, we were able to benefit from load balancing using data locality in CMS and reduced the number of manual intermediate steps and data management, which can be error prone. Overall, we were able to iterate with the full analysis from MiniAOD to the final limits in a matter of a few days.
 
 \section{Expected performance}
 \label{sec:mem_performace}
@@ -408,7 +445,9 @@ The scale factor~$\alpha$~is optimised to adjust the relative normalization of t
 \end{centering}
 \end{figure}
 
-The performance of the MEM depends crucially on whether the jets in the observed final state can be correctly associated to the particles from the hard interaction. For the following comparisons, we define the full~\ttHbb~selection, corresponding to all the events that pass the detector-level selection criteria; and the matched selection, where the full selection is augmented by further requiring that all the jets in the event can be matched to the generator-level partons of the corresponding to the hypothesis. This matching is done geometrically using a cone size of~$\Delta R = 0.3$. For example, for the signal hypothesis in the~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation, we require that the two light jets can be matched to the quarks from the hadronic W~decay, two b~jets can be matched to bottom quarks from the Higgs and two b jets to bottom quarks from the top quark decay. This is done using generator-level information using the full decay chain. For the~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ hypothesis, we require only one of the light jets to be matched to a quark from the W~boson, and for the~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$~hypothesis, the only the b jets are  required to be matched to b quarks. We show the estimated matching fractions in~\cref{matching_fracs}. We find that in the semileptonic~$\geq6j\geq4t$~category, the jets can be fully matched to the quarks in approximately 20\% of the cases, whereas in the dileptonic~$\geq4j\geq4t$~category, the fraction is 59\%, allowing the MEM computation to be more effective.
+The performance of the MEM depends crucially on whether the jets in the observed final state can be correctly associated to the particles from the hard interaction. For the following comparisons, we define the full~\ttHbb~selection, corresponding to all the events that pass the detector-level selection criteria; and the matched selection, where the full selection is augmented by further requiring that all the jets in the event can be matched to the generator-level partons of the corresponding to the hypothesis. This matching is done geometrically using a cone size of~$\Delta R = 0.3$.
+
+For example, for the signal hypothesis in the~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation, we require that the two light jets can be matched to the quarks from the hadronic W~decay, two b~jets can be matched to bottom quarks from the Higgs and two b jets to bottom quarks from the top quark decay. This is done using generator-level information using the full decay chain. For the~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ hypothesis, we require only one of the light jets to be matched to a quark from the W~boson, and for the~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$~hypothesis, the only the b jets are  required to be matched to b quarks. We show the estimated matching fractions in~\cref{tab:matching_fracs}. We find that in the semileptonic~$\geq6j\geq4t$~category, the jets can be fully matched to the quarks in approximately 20\% of the cases, whereas in the dileptonic~$\geq4j\geq4t$~category, the fraction is 59\%, allowing the MEM computation to be more effective.
 
 \begin{table}[h!]
 \begin{center}
@@ -416,19 +455,19 @@ The performance of the MEM depends crucially on whether the jets in the observed
 \hline
 category & hypothesis & full final state & Higgs and top & Higgs only \\
 \hline
-SL 6j4t & SL $2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.20 & 0.51 & 0.69 \\
-SL 6j3t & SL $2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.09 & 0.24 & 0.52 \\
-SL 5j4t & SL $1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.36 & 0.59 & 0.74 \\
+SL $\geq$6j$\geq$4t & SL $2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.20 & 0.51 & 0.69 \\
+SL $\geq$6j3t & SL $2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.09 & 0.24 & 0.52 \\
+SL 5j$\geq$4t & SL $1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.36 & 0.59 & 0.74 \\
 SL 5j3t & SL $1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$  & 0.14 & 0.23 & 0.51 \\
 SL 4j4t & SL $0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.61 & 0.61 & 0.75 \\
 SL 4j3t & SL $0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$  & 0.18 & 0.18 & 0.47 \\
 \hline
-DL 4j4t & DL $2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.59 & 0.59 & 0.74 \\
-DL 4j3t & DL $2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.30 & 0.30 & 0.55 \\
+DL $\geq$4j$\geq$4t & DL $2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.59 & 0.59 & 0.74 \\
+DL $\geq$4j3t & DL $2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.30 & 0.30 & 0.55 \\
 \hline
 \hline
 \end{tabular}
-\caption[The fraction of matched events in the analysis categories]{The fraction of events where the jets could be matched to partons from the hard interaction under the full hypothesis consisting of all the quarks from the W-boson, top and Higgs decay; matching only the b~quarks from the Higgs and top decay and finally only the quarks from the Higgs decay. We see that for the SL~$\geq6j\geq4t$~category, 20\% of events could be matched to the full final state, whereas in the DL~$\geq4j\geq4t$~category, the equivalent fraction is 59\%. This stark differences arises due to the difficulty of reconstructing light quarks from the hadronic W-boson decay. Furthermore, we see that in the categories with 3 b-tags, the fraction of events with full matching is significantly lower, especially in terms of matching for the top quark decay products. The estimation is made using~\ttHbb~simulation.}
+\caption[The fraction of matched events in the analysis categories]{The fraction of events where the jets could be matched to partons from the hard interaction under the full hypothesis consisting of all the quarks from the W-boson, top and Higgs decay; matching only the b~quarks from the Higgs and top decay and finally only the quarks from the Higgs decay. We see that for the SL~$\geq6j\geq4t$~category, 20\% of events could be matched to the full final state, whereas in the DL~$\geq4j\geq4t$~category, the equivalent fraction is 59\%. This stark differences arises due to the difficulty of reconstructing light quarks from the hadronic W-boson decay. Furthermore, we see that in the categories with 3 b~tags, the fraction of events with full matching is significantly lower, especially in terms of matching for the top quark decay products. The estimation is made using~\ttHbb~simulation.}
 \end{center}
 \label{tab:matching_fracs}
 \end{table}
@@ -436,58 +475,58 @@ DL 4j3t & DL $2_{\mathrm{h}} 2_{\mathrm{t}}$ & 0.30 & 0.30 & 0.55 \\
 \subsection{Semileptonic categories}
 We compare the MEM distributions and expected performance on events with 4 jets, 5 jets and~$\ge6$ jets in the single-lepton channel. Using these 3 broad categories, we can see the effect of adding additional information about jet kinematics to the MEM discriminator. We further split the events into two subcategories requiring at least 4 b~tagged jets, corresponding to a high-purity selection, and exactly 3 b~tagged jets and a high~$\mathcal{BLR}$ discriminator, corresponding to a lower-purity MEM control region. This allows us to evaluate the effect of incorrect hypotheses on the MEM performance, as the lower-purity category will have a large fraction of events which cannot be matched according to the above prescription. 
 
-\subsubsection{4-jet categories}
+\subsubsection{4-jet final state}
 On the SL categories with only 4 jets using only the kinematics of the b~jets, we are able to achieve a background efficiency of~$\simeq 30\%$ at a signal efficiency of~$50\%$ by selecting a sample where the 4 jets are likely to arise from bottom quarks using b tagging, as seen on~\cref{fig:mem_sl_j4_t4}. Extending the MEM to the 3 b tag, high~$\mathcal{BLR}$ shows the importance of having selected the right candidates for the b quarks, as can be seen on~\cref{fig:mem_sl_j4_t3}, where the lower matching fraction in signal results in a lower discriminator performance. Therefore, we conclude that it is feasible to use the newly-introduced $0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$-hypothesis in the 4-jet category, in case the 4 jets are likely to arise from the hadronization b quarks from the decay of the Higgs boson and the top quark.
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_sl_j4_t4.pdf}
-\caption[MEM with the~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the 4~jet, 4~b-tag category]{The MEM discriminator with the interpretation~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, with the momenta of the 2 light quarks from the~$\mathrm{W}$-boson integrated over, in the single-leptonic category with 4 jets, 4 b tags. Compared to~\cref{fig:mem_sl_j4_t3}, we see an improvement in performance, as the requirement of 4 b tags enhances the fraction of events where the jets can be matched to quarks, thereby increasing the fraction of events where the correct MEM hypothesis is computed.}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_sl_j4_t4.pdf}
+\caption[MEM with the~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the 4~jet, 4~b~tag category]{The MEM discriminator with the interpretation~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, with the momenta of the 2 light quarks from the~$\mathrm{W}$-boson integrated over, in the single-leptonic category with 4 jets, 4 b tags. Compared to~\cref{fig:mem_sl_j4_t3}, we see an improvement in performance, as the requirement of 4 b tags enhances the fraction of events where the jets can be matched to quarks, thereby increasing the fraction of events where the correct MEM hypothesis is computed.}
 \label{fig:mem_sl_j4_t4}
 \end{centering}
 \end{figure}
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_sl_j4_t3_blrH.pdf}
-\caption[MEM with the~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the 4~jet, 3~b-tag, high~$\mathcal{BLR}$ category]{The MEM discriminator with the interpretation~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, with the momenta of the 2 light quarks from the~$\mathrm{W}$-boson integrated over, in the single-leptonic category with 4 jets, 3 b tags, high~$\mathcal{BLR}$. On the left, we show the discriminator distributions, on the right, the expected performance as characterized by the ROC for all events (black) and the events for which the jets could be matched to the partons from the hard process (green). Based on the kinematics of the 4 b jet, the MEM is already able to achieve a degree of separation ($\mathrm{AUC} = 0.41$) in this category. The distributions are derived using the full~\ttHbb~and~\ttbar+jets simulations, including detector effects.}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_sl_j4_t3.pdf}
+\caption[MEM with the~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the 4~jet, 3~b~tag category]{The MEM discriminator with the interpretation~$0_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, with the momenta of the 2 light quarks from the~$\mathrm{W}$-boson integrated over, in the single-leptonic category with 4 jets, 3 b tags. On the left, we show the discriminator distributions, on the right, the expected performance as characterized by the ROC for all events (black) and the events for which the jets could be matched to the partons from the hard process (green). Based on the kinematics of the 4 b jet, the MEM is already able to achieve a degree of separation ($\mathrm{AUC} = 0.41$) in this category. The distributions are derived using the full~\ttHbb~and~\ttbar+jets simulations, including detector effects.}
 \label{fig:mem_sl_j4_t3}
 \end{centering}
 \end{figure}
 
-\subsubsection{5-jet categories}
+\subsubsection{5-jet final state}
 By adding the information of an additional jet in the 5 jet categories, the background efficiency decreases to~$20\%$ at the benchmark point of 50\% signal efficiency in the 4 tag category on~\cref{fig:mem_sl_j5_t4}. Thus we see that the additional information provided by the kinematics of the extra jet helps to constrain the MEM integration significantly. The category with 3 b tags and high~$\mathcal{BLR}$ performs slightly worse, with the main effect coming from the additional light jet not being associated to the~$\mathrm{W}$-boson, as can be seen from~\cref{fig:mem_sl_j5_t3}.
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_sl_j5_t3_blrH.pdf}
-\caption[MEM with the~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the 5 jet, 3 b~tag, high~$\mathcal{BLR}$ category]{The MEM discriminator with the interpretation~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, with the momentum of 1 of the light quarks from the~$\mathrm{W}$-boson integrated over, in the single-leptonic category with 5 jets, 3 b tags, high~$\mathcal{BLR}$. Compared to~\cref{fig:mem_sl_j4_t3}, we have added the information about one of the quarks from the hadronic~$\mathrm{W}$-boson decay, thus constraining the integration. From the ROC on the right plot, we see that for the matched case (green), the MEM performs significantly better than the corresponding discriminator on~\cref{fig:mem_sl_j4_t3}, thanks to the additional information available. However, the low fraction of matched events ($< 10\%$ for signal) significantly degrades the observed performance (black). Most of the mismatched events come from the additional light quark not corresponding to the hadronic~$\mathrm{W}$-boson decay. Thus, we see the importance of deploying the MEM on final states where the relevant particles are reconstructed.}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_sl_j5_t3.pdf}
+\caption[MEM with the~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the 5 jet, 3 b~tag category]{The MEM discriminator with the interpretation~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, with the momentum of 1 of the light quarks from the~$\mathrm{W}$-boson integrated over, in the single-leptonic category with 5 jets, 3 b tags. Compared to~\cref{fig:mem_sl_j4_t3}, we have added the information about one of the quarks from the hadronic~$\mathrm{W}$-boson decay, thus constraining the integration. From the ROC on the right plot, we see that for the matched case (green), the MEM performs significantly better than the corresponding discriminator on~\cref{fig:mem_sl_j4_t3}, thanks to the additional information available. However, the low fraction of matched events ($< 10\%$ for signal) significantly degrades the observed performance (black). Most of the mismatched events come from the additional light quark not corresponding to the hadronic~$\mathrm{W}$-boson decay. Thus, we see the importance of deploying the MEM on final states where the relevant particles are reconstructed.}
 \label{fig:mem_sl_j5_t3}
 \end{centering}
 \end{figure}
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_sl_j5_tge4.pdf}
-\caption[MEM with the~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the 5 jet, $\ge4$ b-tags category]{The MEM discriminator with the interpretation~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, with the momentum of 1 of the light quarks from the~$\mathrm{W}$-boson integrated over, in the single-leptonic category with 5 jets, 4 b tags. By requiring 4 b~tagged jets, the jets in the final state correspond to the partons from the underlying hypothesis in about~$35\%$ of cases for signal. We also see that the performance of the MEM discriminator is thus increased compared to~\cref{fig:mem_sl_j5_t3}.}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_sl_j5_tge4.pdf}
+\caption[MEM with the~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the 5 jet, $\ge4$ b~tags category]{The MEM discriminator with the interpretation~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, with the momentum of 1 of the light quarks from the~$\mathrm{W}$-boson integrated over, in the single-leptonic category with 5 jets, 4 b tags. By requiring 4 b~tagged jets, the jets in the final state correspond to the partons from the underlying hypothesis in about~$35\%$ of cases for signal. We also see that the performance of the MEM discriminator is thus increased compared to~\cref{fig:mem_sl_j5_t3}.}
 \label{fig:mem_sl_j5_t4}
 \end{centering}
 \end{figure}
 
-\subsubsection{6-jet categories}
+\subsubsection{6-jet final state}
 In the categories with 6 or more jets, we verify that the MEM is able to exploit the information in the fully-reconstructed category, with a~$\simeq 10\%$ background efficiency in the case where the jets could be fully matched to the partons of the underlying hypothesis, as shown on~\cref{fig:mem_sl_jge6_tge4} for events with at least 4 b~tagged jets. On the extended events with 3 b~tagged jets, high~$\mathcal{BLR}$, the MEM still shows relatively good discrimination (\cref{fig:mem_sl_jge6_t3}), with the most significant reduction coming from the fraction of events where one of the light jets assumed to arise from~$\mathrm{W} \rightarrow \mathrm{q} \mathrm{q}'$ was instead spurious.
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_sl_jge6_t3_blrH.pdf}
-\caption[MEM with the $2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the $\ge6$ jets, 3~b tags, high~$\mathcal{BLR}$ category]{The MEM discriminator with the interpretation~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, i.e. the fully reconstructed hypothesis, in the single-leptonic category with at least 6 jets, 3 b tags, high~$\mathcal{BLR}$.}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_sl_jge6_t3.pdf}
+\caption[MEM with the $2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the $\ge6$ jets, 3~b tags category]{The MEM discriminator with the interpretation~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, i.e. the fully reconstructed hypothesis, in the single-leptonic category with at least 6 jets, 3 b tags. We see that while the performance on the events that can be matched to the quarks from the underlying hard process is excellent, the fraction of matched events is below 10\%, degrading the performance on realistic events.}
 \label{fig:mem_sl_jge6_t3}
 \end{centering}
 \end{figure}
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_sl_jge6_tge4.pdf}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_sl_jge6_tge4.pdf}
 \caption[MEM with the~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the $\ge6$ jet, $\ge4$ b~tag category]{The MEM discriminator with the interpretation~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, i.e. the fully reconstructed hypothesis, in the single-leptonic category with at least 6 jets, at least 4 of which must be b~tagged. This is the category with the highest signal to background ratio and with a full reconstruction of the 2 light quark, 4 bottom quark final state corresponding to~\ttHbb. We see that in case all the jets were matched to the quarks, the signal to background separation provided by the MEM is significant, with a background efficiency of around~$10\%$ at a median signal efficiency. After relaxing the matching criterion, the separation decreases by about a factor of 2 at the expense of the signal distribution becoming more background-like.}
 \label{fig:mem_sl_jge6_tge4}
 \end{centering}
@@ -502,7 +541,7 @@ However, the computational cost~(\cref{tab:mem_cpu_budget})~would increase by ab
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_sl_jge6_tge4_1w2h2t.pdf}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_sl_jge6_tge4_1w2h2t.pdf}
 \caption[MEM with the~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the $\ge6$ jet, $\ge4$ b~tag category]{The MEM discriminator with the interpretation~$1_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ in the single-leptonic category with at least 6 jets, at least 4 of which must be b~tagged. In comparison to~\cref{fig:mem_sl_jge6_tge4}~, we have integrated over the momentum of one of the light jets, assuming that only one of the two light jets corresponds to a quark from the~$\mathrm{W}$-boson decay. We see a slightly improved performance compared to the fully reconstructed hypothesis in the case of all events (black), and a slight decrease for events that are fully matched. This is consistent with the performance of the MEM being strongly dependent on whether the objects in the final state correspond to the hard scattering process.}
 \label{fig:mem_sl_jge6_tge4_1w2h2t}
 \end{centering}
@@ -513,7 +552,7 @@ Furthermore, we have studied the effect of including diagrams containing additio
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_sl_jge7_tge4.pdf}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_sl_jge7_tge4.pdf}
 \caption[MEM with the~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the $\ge7$-jet, $\ge4$ b~tag category]{The MEM discriminator with the interpretation~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}}$, i.e. the fully reconstructed interpretation, in the single-leptonic category with at least 7 jets, at least 4 of which must be b~tagged. In order to interpret the light jets as quarks, we sum over all possibilities of choosing 2 light quarks from the 3 light jets most compatible with a~$\mathrm{W}$-boson decay according to invariant mass. We see that in the presence of an additional jet, the fully-reconstructed MEM interpretation is still able to distinguish between signal and background at an acceptable level.}
 \label{fig:mem_sl_jge7_tge4}
 \end{centering}
@@ -521,26 +560,33 @@ Furthermore, we have studied the effect of including diagrams containing additio
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_sl_jge7_tge4_1g.pdf}
-\caption[MEM with the~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}} 1_{\mathrm{g}}$ interpretation in the $\ge7$ jet, $\ge4$ b-tag category]{The MEM discriminator with the interpretation~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}} 1_{\mathrm{g}}$, where we include the gluon radiation in the signal and background hypotheses, in the single-leptonic category with at least 7 jets, at least 4 of which must be b~tagged. Compared to the hypothesis without gluon radiation on~\cref{fig:mem_sl_jge7_tge4}~, we do not see an improved discrimination from including this more complex hypothesis.}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_sl_jge7_tge4_1g.pdf}
+\caption[MEM with the~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}} 1_{\mathrm{g}}$ interpretation in the $\ge7$ jet, $\ge4$ b~tag category]{The MEM discriminator with the interpretation~$2_{\mathrm{W}} 2_{\mathrm{h}} 2_{\mathrm{t}} 1_{\mathrm{g}}$, where we include the gluon radiation in the signal and background hypotheses, in the single-leptonic category with at least 7 jets, at least 4 of which must be b~tagged. Compared to the hypothesis without gluon radiation on~\cref{fig:mem_sl_jge7_tge4}~, we do not see an improved discrimination from including this more complex hypothesis.}
 \label{fig:mem_sl_jge7_tge4_7jet}
 \end{centering}
 \end{figure}
 
 \subsection{Dileptonic categories}
-We have also evaluated the MEM discriminator in the dileptonic categories, where the W-bosons from both top quarks decay leptonically. At the level of the hard interaction, we expect 4 b~quarks: two from the \Hbb~decay and 2 from the top quark decay. In order to associate the jets to the quarks, we select the set of 4 jets that are most compatible with b~quarks. Thus, we have 12 combinations to assign the 4 quarks to the 4 b jets. In general, we see e
+We have also evaluated the MEM discriminator in the dileptonic categories, where the W-bosons from both top quarks decay leptonically. At the level of the hard interaction, we expect 4 b~quarks: two from the \Hbb~decay and 2 from the top quark decay. In order to associate the jets to the quarks, we select the set of 4 jets that are most compatible with b~quarks. Thus, we have 12 combinations to assign the 4 quarks to the 4 b jets. In general, we see excellent performance of the MEM in the dilepton categories with both 4 and 3 b~tags, since in around 60\% of the cases, the jets in the event can be matched to the b~quarks from the underlying hard process. This means that the MEM can be used as a powerful signal-to-background discriminator in the dilepton final states, despite the complexity of the integration that is required to account for the momenta of the two neutrinos.
 
 
 \begin{figure}[ht]
 \begin{centering}
-\includegraphics[width = 1.0\textwidth]{figures/mem/mem_dl_jge4_tge4.pdf}
-\caption[MEM with the~$2_{\mathrm{h}} 2_{\mathrm{t}} 1_{\mathrm{g}}$ interpretation in the dileptonic $\ge4$ jet, $\ge4$ b-tag category]{The MEM discriminator with the interpretation~$2_{\mathrm{h}} 2_{\mathrm{t}}$ in the dileptonic category with at least 4 jets, all of which must be b~tagged.}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_dl_jge4_tge4.pdf}
+\caption[MEM with the~$2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the dileptonic $\ge4$ jet, $\ge4$ b~tag category]{The MEM discriminator with the interpretation~$2_{\mathrm{h}} 2_{\mathrm{t}}$ in the dileptonic category with at least 4 jets, all of which must be b~tagged. We see that at 50\% signal efficiency, the inclusive~\ttbar~efficiency is around 17\% as estimated on simulation.}
 \label{fig:mem_dl_jge4_tge4}
 \end{centering}
 \end{figure}
 
-\section{Summary of MEM studies}
-To summarize, we have implemented the MEM discriminator for the~\ttHbb~analysis in Run II with significant improvements over the approach used in Run I. The MEM can now be 
+\begin{figure}[ht]
+\begin{centering}
+\includegraphics[width = 0.8\textwidth]{figures/mem/mem_dl_jge4_t3.pdf}
+\caption[MEM with the~$2_{\mathrm{h}} 2_{\mathrm{t}}$ interpretation in the dileptonic $\ge4$ jet, 3 b~tag category]{The MEM discriminator with the interpretation~$2_{\mathrm{h}} 2_{\mathrm{t}}$ in the dileptonic category with at least 4 jets, out of which 3 are b~tagged. Compared to~\cref{fig:mem_dl_jge4_tge4}, the expected performance decreases somewhat, with a background efficiency of 20\% at the reference signal efficiency. Nevertheless, it is possible to use the DL MEM in the 3 b~tag category as an efficient tt+bb discriminator.}
+\label{fig:mem_dl_jge4_t3}
+\end{centering}
+\end{figure}
 
-We have further studied the performance of the MEM discriminator in several categories with a varying number of jets, corresponding to the gradual increase of information available to the MEM in a multi-particle final state. We have seen that in case all the partons from the hard scattering process are present in the final state, the MEM is able to distinguish between the signal and background hypotheses with a background efficiency of~$\simeq 20\%$ for a signal efficiency of~$50\%$ based only on high-level event kinematic properties. The effect of spurious jets degrades the performance of the discriminator, since the MEM does not model the properties of these jets. Therefore, an accurate reconstruction of the final state is very important for the MEM discriminator, especially in the signal sample.
- In conclusion, we find that the MEM is a suitable discriminator in the~\ttHbb~search, given the performance and the solid theoretical foundation on which it is based.
+\section{Summary of MEM studies}
+To summarize, we have implemented the MEM discriminator for the~\ttHbb~analysis in Run II with significant improvements over the approach used in Run I. The MEM can now be computed in all relevant final states in the~\ttHbb~analysis and we have studied the expected performance on MC simulation. The performance studies are carried out in several categories with a varying number of jets, corresponding to the gradual increase of information available to the MEM in a multi-particle final state. We have seen that in case all the partons from the hard scattering process are present in the final state, the MEM is able to distinguish between the signal and background hypotheses with a background efficiency of~$\simeq 10\%$ for a signal efficiency of~$50\%$ based only on high-level event kinematic properties. The effect of the quark jets being outside the acceptance region degrades the performance of the discriminator, as the spurious jets that are instead associated to the quarks do not provide any constraining power in the integrand. Therefore, an accurate reconstruction of the final state is very important for the MEM discriminator, especially in the signal sample.
+
+Nevertheless, the expected realistic performance of the MEM, based on full detector simulation, is excellent in the high jet and b~tag multiplicity categories. In the best semileptonic category, the \ttbar+jets efficiency is around 20\% at a reference signal efficiency of 50\%, whereas in dilepton, the background rejection is even higher. We have further studied the resilience of the MEM to QCD radiation and found that the performance does not change markedly by introducing effective Sudakov reweighting or diagrams with additional jets. In conclusion, we find that the MEM is a suitable discriminator in the~\ttHbb~search, given the performance and the solid theoretical foundation on which it is based.
