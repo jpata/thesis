@@ -1,0 +1,12 @@
+Thu Oct 19 13:04:51 CEST 2017
+Total
+Sum count: 30890
+Words in text: 26461
+Words in headers: 257
+Words outside text (captions, etc.): 3276
+Number of headers: 99
+Number of floats/tables/figures: 62
+Number of math inlines: 842
+Number of math displayed: 54
+Files: 9
+---
