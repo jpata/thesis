@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2017.7.11)  9 OCT 2017 12:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2017.7.11)  22 OCT 2017 20:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -33,7 +33,7 @@ Package: preview 2010/02/14 11.89 (AUCTeX/preview-latex)
 \pr@box=\box26
 \pr@output=\toks14
 )
-No file table_dl_jge4_tge2.aux.
+(./table_dl_jge4_tge2.aux)
 \openout1 = `table_dl_jge4_tge2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
@@ -48,6 +48,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
 LaTeX Font Info:    ... okay on input line 6.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
 LaTeX Font Info:    ... okay on input line 6.
+
 Preview: Fontsize 12pt
 Preview: PDFoutput 1
 (./dl_jge4_tge2.tex
@@ -62,8 +63,8 @@ Preview: Tightpage -131072 -131072 131072 131072
 [1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (./table_dl_jge4_tge2.aux) ) 
 Here is how much of TeX's memory you used:
- 348 strings out of 493027
- 4122 string characters out of 6134069
+ 350 strings out of 493027
+ 4168 string characters out of 6134069
  56438 words of memory out of 5000000
  3958 multiletter control sequences out of 15000+600000
  6376 words of font info for 23 fonts, out of 8000000 for 9000
@@ -71,7 +72,7 @@ Here is how much of TeX's memory you used:
  22i,8n,20p,162b,145s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmr12.pfb>
-Output written on table_dl_jge4_tge2.pdf (1 page, 15297 bytes).
+Output written on table_dl_jge4_tge2.pdf (1 page, 15306 bytes).
 PDF statistics:
  12 PDF objects out of 1000 (max. 8388607)
  7 compressed objects within 1 object stream
