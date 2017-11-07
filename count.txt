@@ -70,3 +70,15 @@ Number of math inlines: 848
 Number of math displayed: 56
 Files: 9
 ---
+Sat Oct 28 21:45:08 CEST 2017
+Total
+Sum count: 34797
+Words in text: 29602
+Words in headers: 332
+Words outside text (captions, etc.): 3884
+Number of headers: 128
+Number of floats/tables/figures: 74
+Number of math inlines: 923
+Number of math displayed: 56
+Files: 9
+---
