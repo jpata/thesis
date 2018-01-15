@@ -7,7 +7,7 @@ open:
 	open thesis.pdf
 
 clean:
-	rm -f *.pdf *.aux *.log *.out
+	rm -f *.pdf *.aux *.log *.out *.bcf *.blg *.fls *.lof *.lot *.ps *.toc *.pdfsync
 
 count:
 	date >> count.txt

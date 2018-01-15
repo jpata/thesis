@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2017.7.11)  23 OCT 2017 10:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2017.7.11)  16 NOV 2017 16:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -63,21 +63,20 @@ Preview: Tightpage -131072 -131072 131072 131072
 [1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (./table_lims.aux) ) 
 Here is how much of TeX's memory you used:
- 351 strings out of 493027
- 4075 string characters out of 6134069
+ 349 strings out of 493027
+ 4054 string characters out of 6134069
  56438 words of memory out of 5000000
- 3958 multiletter control sequences out of 15000+600000
- 6683 words of font info for 24 fonts, out of 8000000 for 9000
+ 3957 multiletter control sequences out of 15000+600000
+ 6376 words of font info for 23 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 22i,8n,20p,154b,182s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 22i,8n,20p,154b,147s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb>
-Output written on table_lims.pdf (1 page, 29899 bytes).
+onts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb>
+Output written on table_lims.pdf (1 page, 21682 bytes).
 PDF statistics:
- 20 PDF objects out of 1000 (max. 8388607)
- 13 compressed objects within 1 object stream
+ 16 PDF objects out of 1000 (max. 8388607)
+ 10 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

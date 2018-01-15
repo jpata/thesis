@@ -1,0 +1,20 @@
+\documentclass[border=10pt]{standalone}
+%\usepackage[active,tightpage]{preview}
+%\PreviewBorder=0pt
+
+\usepackage{tikz-feynman}
+
+\begin{document}
+%\begin{preview}
+
+\begin{centering}
+%\begin{tikzpicture}[x=5.0cm, y=5.0cm]
+\feynmandiagram[x=5.0cm, y=5.0cm][horizontal=a to b] {
+i1 [particle=\(e^-\)] -- [fermion] a [dot] -- [fermion] [particle=\(e^+\)] i2,
+a -- [photon, edge label=\(\gamma\)] b,
+};
+%\end{tikzpicture}
+\end{centering}
+
+%\end{preview}
+\end{document}

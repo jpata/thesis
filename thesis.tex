@@ -1,12 +1,19 @@
-\documentclass[
-  a4paper,
-  BCOR=15mm,
-  bibliography=totoc,
-  numbers=noenddot,
-  headings=optiontotocandhead,
-  twoside
-]{scrbook}
+% \documentclass[
+%   a4paper,
+%   BCOR=15mm,
+%   bibliography=totoc,
+%   numbers=noenddot,
+%   headings=optiontotocandhead,
+%   twoside
+% ]{scrbook}
 
+\documentclass[twoside,openright,titlepage,numbers=noenddot,headinclude,
+    footinclude=true,cleardoublepage=empty,
+    BCOR=5mm,paper=a4,fontsize=10pt,bibliography=totoc,headings=optiontotocandhead]{scrbook}
+%\usepackage[parts,beramono,eulerchapternumbers,listings,manychapters,floatperchapter]{classicthesis} 
+%\DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\scshape #1}}
+
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
 \usepackage{ifpdf}
@@ -23,7 +30,7 @@
 \usepackage[final]{graphicx}
 \usepackage{lineno}
 
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage{amsmath}
 \usepackage[acronym]{glossaries} %abbreviations
 \usepackage{subfloat}
@@ -58,7 +65,8 @@
     style=numeric,
     block=none,
     doi=true,
-    eprint=true
+    eprint=true,
+    sorting=none
 ]{biblatex}
 \bibliography{bibliography}
 
@@ -70,7 +78,7 @@
 % \textwidth 16.59cm
 % \textheight 21.94cm
 %\pagestyle{fancyplain}
-\linespread{1.5}
+\linespread{1.0}
 \parindent 0.5cm
 
 
@@ -89,25 +97,107 @@
 %\raggedbottom
 
 \input{macros.tex}
+\newcommand{\myTitle}{Search for the production of Higgs bosons in association with top quark pairs with CMS at $\sqrt{s}=13$ TeV}
+\newcommand{\myDissNumber}{123}
+\newcommand{\myDOI}{123}
+\newcommand{\myName}{Joosep Pata}
+\newcommand{\myTime}{2017}
 
 \begin{document}
-\setpagewiselinenumbers
-\linenumbers
+\pagenumbering{gobble}
+\begin{titlepage}
+  % if you want the titlepage to be centered, uncomment and fine-tune the line below (KOMA classes environment)
+  %\begin{addmargin}[-1cm]{-3cm}
+    \begin{center}
+        \large
+        \begingroup
+            \large
+            DISS. ETH No. \myDissNumber
+        \endgroup
+
+        \hfill
+
+        \vfill
+
+        \begingroup
+            \Huge{\myTitle}
+        \endgroup
+
+        \vfill
+
+        \begingroup
+            A thesis submitted to attain the degree of\\
+            \vspace{0.5em}
+            \Large Doctor of Sciences of ETH Zurich \\
+            (Dr.\ sc.\ ETH Zurich)
+        \endgroup
+
+        \vfill
+
+        \begingroup
+            presented by\\
+            \vspace{0.5em}
+            \LARGE\myName\\
+            \normalsize
+            \vspace{0.2em}
+            M.Sc. (Physics), University of Tartu \\
+            \vspace{0.5em}
+            born on 24.05.1990\\
+            citizen of Estonia
+        \endgroup
+
+        \vfill
+
+        \begingroup
+            accepted on the recommendation of\\
+            \vspace{0.5em}
+            \Large
+            Prof.\ Dr.\ G\"unther Dissertori, examiner\\
+            Prof.\ Dr.\ Nigel Glover, co-examiner\\
+            Prof.\ Dr.\ Stefano Pozzorini, co-examiner\\
+        \endgroup
+
+        \vfill
+
+        \myTime%
+
+        \vfill
+    \end{center}
+  %\end{addmargin}
+\end{titlepage}
+
+\thispagestyle{empty}
+% \hfill
+% \vfill
+% \noindent\myName: \textit{\myTitle,} %\mySubtitle, %\myDegree, 
+% \textcopyright\ \myTime
+% \bigskip
+% \noindent\spacedlowsmallcaps{DOI}: \myDOI
+
+% \setpagewiselinenumbers
+% \linenumbers
 %\selectlanguage{english}
 
-\tableofcontents
-\newpage
-\listoffigures
-\listoftables
+\input{abstract.tex}
+\input{abstract_de.tex}
 
-%\input{intro.tex}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\input{intro.tex}
 \input{theory.tex}
 \input{experiment.tex}
 \input{btag.tex}
 \input{mem.tex}
 \input{tth.tex}
 \input{lingvist.tex}
+\input{outlook.tex}
 
+\newpage
+\listoffigures
+\newpage
+\listoftables
 \newpage
 \printbibliography
 

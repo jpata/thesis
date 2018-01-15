@@ -82,3 +82,27 @@ Number of math inlines: 923
 Number of math displayed: 56
 Files: 9
 ---
+Tue Nov  7 20:50:31 CET 2017
+Total
+Sum count: 38462
+Words in text: 32130
+Words in headers: 336
+Words outside text (captions, etc.): 4959
+Number of headers: 130
+Number of floats/tables/figures: 96
+Number of math inlines: 980
+Number of math displayed: 57
+Files: 9
+---
+Mon Nov 13 10:43:48 CET 2017
+Total
+Sum count: 39112
+Words in text: 32340
+Words in headers: 335
+Words outside text (captions, etc.): 5385
+Number of headers: 130
+Number of floats/tables/figures: 100
+Number of math inlines: 995
+Number of math displayed: 57
+Files: 9
+---
